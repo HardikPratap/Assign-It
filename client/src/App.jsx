@@ -1,32 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import { Toaster } from 'sonner';
 import Login from './pages/Login'
+import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard'
 import Tasks from './pages/Tasks'
 import Users from './pages/Users'
 import Trash from './pages/Trash'
 import Taskdetails from './pages/Taskdetails'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 
 function Layout(){
-  const user="";
+  const {user}= useSelector((state)=>state.auth);
 
   const location = useLocation();
 
   return user?(
     <div className='w-full h-screen flex flex-col md:flex-row'>
-      <div className='w-1/5 h-screen bg-black sticky top-0 hidden md:block'>
+      <div className='w-1/5 h-screen bg-white sticky top-0 hidden md:block'>
         {/* <Sidebar /> */}
       </div>
 
       {/* <MobileSidebar /> */}
 
       <div className='flex-1 overflow-y-auto'>
-        <Navbar />
+        {/* <Navbar /> */}
 
         <div className='p-4 2xl:px-10'>
           <Outlet />
@@ -56,6 +56,7 @@ function App() {
         </Route>
 
         <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
       </Routes>
 
       <Toaster richColors />

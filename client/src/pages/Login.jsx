@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import "../App.css"
-import { GlobeDemo } from '../components/ui/GlobeDemo'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import Textbox from '../components/TextBox';
 import  Button  from '../components/Button';
+import { GlobeDemo } from '../components/ui/globeDemo';
+import { useSelector } from 'react-redux';
 
 
 function Login() {
-    const user ="";
+    const {user}= useSelector((state)=>state.auth);
     const{register , handleSubmit,
         formState: { errors },
       } = useForm();
@@ -18,6 +19,7 @@ function Login() {
     const submitHandler = async (data) => {
         console.log("submit");
       };
+      console.log(user)
     
       useEffect(() => {
         user && navigate("/dashboard");
