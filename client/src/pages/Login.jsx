@@ -4,6 +4,7 @@ import { GlobeDemo } from '../components/ui/GlobeDemo'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import Textbox from '../components/TextBox';
+import  Button  from '../components/Button';
 
 
 function Login() {
@@ -54,10 +55,16 @@ function Login() {
                         })}
                         error={errors.password ? errors.password.message : ""}
                     />
+                    <div className='text-right mr-10 text-xs mt-2 text-gray-400 hover:cursor-pointer hover:text-blue-600 transition-colors  duration-200'>
+                        Forgot Password?
+                    </div>
 
-                <div className='mt-10 text-black'>
-                    <button type='Submit' onClick={handleSubmit}  className='bg-gradient-to-tl from-gray-500 to-white h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600'>Login Now</button>
-                </div>
+                
+                <Button type='submit' 
+                    className='mt-10 text-black h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200'
+                    lable="Login"
+                />
+
 
                 <div className="inline-flex items-center justify-center w-full">
                     <hr className="w-1/2 h-1 my-8 bg-gray-200 border-0 dark:bg-gray-700"/>
