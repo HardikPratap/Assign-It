@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
@@ -7,7 +7,7 @@ const World = dynamic(() => import("./globe").then((m) => m.World), {
   ssr: false,
 });
 
-export function GlobeDemo() {
+export const  GlobeDemo= memo(()=> {
   const globeConfig = {
     pointSize: 4,
     globeColor: "#062056",
@@ -396,9 +396,9 @@ export function GlobeDemo() {
 
   return (
     (<div
-      className="flex flex-row items-center justify-center  h-screen  bg-white relative ">
+      className="flex flex-row items-center justify-center  h-full  bg-white relative ">
       <div
-        className="max-w-7xl mx-auto w-full relative overflow-hidden h-full  px-4">
+        className="max-w-7xl mx-auto w-full relative overflow-hidden min-h-full  ">
         <motion.div
           initial={{
             opacity: 0,
@@ -418,7 +418,7 @@ export function GlobeDemo() {
           </h2>
           <p
             className="text-center text-base md:text-m font-normal text-neutral-700  max-w-md mt-4 mx-auto font-medium">
-            “Welcome to Cloud TODO-ist! Organize tasks, stay productive, and achieve more—anytime, anywhere. Log in to take control of your day!” :)
+            "Organize tasks, stay productive, and achieve more—anytime, anywhere. Log in to take control of your day!” :)
           </p>
         </motion.div>
         <div
@@ -429,4 +429,4 @@ export function GlobeDemo() {
       </div>
     </div>)
   );
-}
+})
