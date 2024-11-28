@@ -20,7 +20,7 @@ function Layout(){
 
   return user?(
     <div className='w-full h-screen flex flex-col md:flex-row'>
-      <div className='w-1/5 h-screen bg-white sticky top-0 hidden md:block rounded-lg '>
+      <div className='w-1/5 h-screen bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 border border-gray-100 sticky top-0 hidden rounded-lg md:block'>
         <Sidebar />
       </div>
 
