@@ -2,7 +2,8 @@ import React from 'react'
 
 function Tasks() {
   return (
-    <div>
+    <div className='text-white'>
+        Tasks
       
     </div>
   )

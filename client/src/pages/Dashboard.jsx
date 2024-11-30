@@ -2,8 +2,8 @@ import React from 'react'
 
 function Dashboard() {
   return (
-    <div>
-      
+    <div className='text-white'>
+      DashBoard
     </div>
   )
 }
