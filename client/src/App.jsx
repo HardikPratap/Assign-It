@@ -11,6 +11,7 @@ import Taskdetails from './pages/Taskdetails'
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
 
 
 function Layout(){
@@ -21,14 +22,14 @@ function Layout(){
   return user?(
     <div className='w-full h-screen flex flex-col md:flex-row'>
       <div className='w-1/5 h-screen bg-white
-       bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 border border-gray-100 sticky top-0 hidden rounded-lg md:block'>
+       bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50  sticky top-0 hidden  md:block'>
         <Sidebar />
       </div>
 
       {/* <MobileSidebar /> */}
 
-      <div className='flex-1 overflow-y-auto rounded-l-lg'>
-        {/* <Navbar /> */}
+      <div className='flex-1 overflow-y-auto'>
+        <Navbar />
 
         <div className='p-4 2xl:px-10 '>
           <Outlet />

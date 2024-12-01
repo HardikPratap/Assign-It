@@ -65,7 +65,6 @@ function Sidebar() {
       };
 
       const Navlink =({el})=>{
-        console.log(el.link.split("/")[0])
         return(
         <Link 
             to={el.link}
