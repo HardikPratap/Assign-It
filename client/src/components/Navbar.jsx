@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { MdOutlineSearch } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 // import UserAvatar from "./UserAvatar";
@@ -6,16 +6,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOpenSidebar } from "../redux/splice/authSplice";
 import UserAvatar from "./UserAvatar";
 
-const Navbar = () => {
-  const { user } = useSelector((state) => state.auth);
+const Navbar = memo(() => {
+  const { user,isSidebarOpen } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  
+  // Monitor the updated value
+  React.useEffect(() => {
+    console.log("Updated isSidebarOpen:", isSidebarOpen); 
+  }, [isSidebarOpen]); 
+
 
   return (
     <div className='flex justify-between items-center bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50  px-4 py-3 2xl:py-4 sticky z-10 top-0'>
       <div className='flex gap-4'>
         <button
-          onClick={() => {dispatch(setOpenSidebar(true))
-          }}
+          onClick={() => dispatch(setOpenSidebar(true))}
           className='text-2xl text-gray-500 block md:hidden'
         >
           ☰
@@ -39,6 +45,6 @@ const Navbar = () => {
       </div>
     </div>
   );
-};
+})
 
 export default Navbar;
