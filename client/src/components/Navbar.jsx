@@ -19,7 +19,7 @@ const Navbar = memo(() => {
 
 
   return (
-    <div className='flex justify-between items-center bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50  px-4 py-3 2xl:py-4 sticky z-10 top-0'>
+    <div className='flex justify-between items-center rounded-b-md bg-gray-700 backdrop-filter backdrop-blur-sm bg-opacity-50  px-4 py-3 2xl:py-4 sticky z-10 top-0'>
       <div className='flex gap-4'>
         <button
           onClick={() => dispatch(setOpenSidebar(true))}
