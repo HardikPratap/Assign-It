@@ -20,7 +20,7 @@ function UserAvatar() {
         console.log("Logout Successfully")
     }
 
-    console.log(user?.name)
+    // console.log(user?.name)
   
   return (
     <>

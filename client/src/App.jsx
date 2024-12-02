@@ -51,7 +51,7 @@ const MobileSidebar = () => {
   const mobileMenuRef = useRef(null);
   const dispatch = useDispatch();
 
-  console.log("Sidebar state:", isSidebarOpen); // Debug state updates
+  // console.log("Sidebar state:", isSidebarOpen); // Debug state updates
 
   const closeSidebar = () => {
     dispatch(setOpenSidebar(false));

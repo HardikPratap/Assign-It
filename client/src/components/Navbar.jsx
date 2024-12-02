@@ -12,10 +12,10 @@ const Navbar = memo(() => {
   const dispatch = useDispatch();
 
   
-  // Monitor the updated value
-  React.useEffect(() => {
-    console.log("Updated isSidebarOpen:", isSidebarOpen); 
-  }, [isSidebarOpen]); 
+//   // Monitor the updated value
+//   React.useEffect(() => {
+//     console.log("Updated isSidebarOpen:", isSidebarOpen); 
+//   }, [isSidebarOpen]); 
 
 
   return (
