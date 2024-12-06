@@ -1,13 +1,13 @@
 import clsx from 'clsx'
 import React from 'react'
 
-function Button({icon,className,lable,type,onClick=()=>{}}) {
+function Button({icon,className,label,type,onClick=()=>{}}) {
   return (
     <button 
         type={type || "button"} 
-        className={clsx("bg-gradient-to-tl from-gray-500 to-white",className)} 
+        className={clsx("px-3 py-2 outline-none",className)} 
     >
-        <span>{lable}</span>
+        <span>{label}</span>
         {icon && icon}
     </button>
   );

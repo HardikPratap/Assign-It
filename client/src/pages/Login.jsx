@@ -63,8 +63,8 @@ function Login() {
 
                 
                 <Button type='submit' 
-                    className='mt-10 text-black h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200'
-                    lable="Login"
+                    className='mt-10 text-black h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200 bg-gradient-to-tl from-gray-500 to-white text-white'
+                    label="Login"
                 />
 
 
