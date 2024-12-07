@@ -27,9 +27,7 @@ const Tabs = ({ tabs, setSelected, children }) => {
             </Tab>
           ))}
         </TabList>
-        <TabPanels className="w-full mt-2">{children}
-
-        </TabPanels>
+        <TabPanels className="w-full mt-2">{children}</TabPanels>
       </TabGroup>
     </div>
   );

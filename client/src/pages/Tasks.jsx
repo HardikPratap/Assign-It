@@ -7,6 +7,9 @@ import Title from '../components/Title';
 import Button from '../components/Button';
 import { IoMdAdd } from 'react-icons/io';
 import Tabs from '../components/Tabs';
+import TaskTitle from '../components/TaskTitle';
+import BoardView from '../components/BoardView';
+import { tasks } from '../assets/data';
 
 
 const TABS = [
@@ -33,7 +36,7 @@ function Tasks() {
   return loading ? <div className='py-10'> <Loader /> </div> :
         (
             <div className='w-full '>
-                <div className='flex items-center justify-between mb-4'>
+                <div className='flex items-center justify-between mb-4 pt-4'>
                     <Title title={status? `${status} Tasks` : "Tasks"} />
 
                     {!status && (
@@ -48,17 +51,17 @@ function Tasks() {
 
                 <div className='text-white'>
                     <Tabs tabs={TABS} setSelected={setSelected} >
-                    {selected !== 1 ? (
-                        <div className='w-full'>
-                        hiiiiii
-                    </div>
-                        ) : (
-                        <div className='w-full'>
-                            HELLLO
-                        </div>
-                        )}
-
-
+                    {!status && (
+                            <div className='w-full flex justify-between gap-4 md:gap-x-10 py-4'>
+                                <TaskTitle label="To Do" className={TASK_TYPE.todo} />
+                                <TaskTitle label="In Proggress" className={TASK_TYPE["in progress"]} />
+                                <TaskTitle label="Completed" className={TASK_TYPE.completed} />
+                            </div>
+                        )
+                    }
+                    {
+                        selected !== 1 ? ( <BoardView tasks={tasks} />) : (<div className='w-full'>"Helloo From List" </div>)
+                    }
                     </Tabs>
                 </div>
 
