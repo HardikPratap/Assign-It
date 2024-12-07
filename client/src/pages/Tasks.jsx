@@ -10,6 +10,8 @@ import Tabs from '../components/Tabs';
 import TaskTitle from '../components/TaskTitle';
 import BoardView from '../components/BoardView';
 import { tasks } from '../assets/data';
+import TableView from '../components/ListView';
+import ListView from '../components/ListView';
 
 
 const TABS = [
@@ -60,7 +62,7 @@ function Tasks() {
                         )
                     }
                     {
-                        selected !== 1 ? ( <BoardView tasks={tasks} />) : (<div className='w-full'>"Helloo From List" </div>)
+                        selected !== 1 ? ( <BoardView tasks={tasks} />) : (<div className='w-full'><ListView tasks={tasks}/> </div>)
                     }
                     </Tabs>
                 </div>
