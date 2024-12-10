@@ -417,7 +417,7 @@ export const  GlobeDemo= memo(()=> {
             Cloud TODO-ist
           </h2>
           <p
-            className="text-center text-base md:text-m font-normal text-neutral-700  max-w-md mt-4 mx-auto font-medium">
+            className="text-center text-base md:text-m  text-neutral-700  max-w-md mt-4 mx-auto font-medium">
             "Organize tasks, stay productive, and achieve more—anytime, anywhere. Log in to take control of your day!” :)
           </p>
         </motion.div>

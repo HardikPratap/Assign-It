@@ -26,7 +26,7 @@ function Signup() {
   return (
     <div className='min-h-full md:flex ' > 
         {/* left Side  */}
-        <div className='text-white justify-items-center pt-36  md:w-3/5 bg-black min-h-screen md:w-full'>
+        <div className='text-white justify-items-center pt-36  md:w-3/5 bg-black min-h-screen '>
             <form
                 onSubmit={handleSubmit(submitHandler)}
                 className='form-container w-full md:w-[400px] content-center text-center'

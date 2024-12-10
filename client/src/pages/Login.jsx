@@ -28,7 +28,7 @@ function Login() {
   return (
     <div className='min-h-full md:flex ' > 
         {/* left Side  */}
-        <div className='text-white justify-items-center pt-36  md:w-3/5 bg-black min-h-screen md:w-full'>
+        <div className='text-white justify-items-center pt-36  md:w-3/5 bg-black min-h-screen '>
             <form
                 onSubmit={handleSubmit(submitHandler)}
                 className='form-container w-full md:w-[400px] content-center text-center'
@@ -63,7 +63,7 @@ function Login() {
 
                 
                 <Button type='submit' 
-                    className='mt-10 text-black h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200 bg-gradient-to-tl from-gray-500 to-white text-white'
+                    className='mt-10  h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200 bg-gradient-to-tl from-gray-500 to-white text-white'
                     label="Login"
                 />
 
