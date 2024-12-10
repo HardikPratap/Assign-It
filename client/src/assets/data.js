@@ -1101,7 +1101,7 @@ export const tasks = [
 
 export const user = {
   _id: "662f32ffd1303cc",
-  name: "Hardik",
+  name: "Hardik Pratap",
   title: "Administrator",
   role: "Admin",
   email: "admin@mts.com",

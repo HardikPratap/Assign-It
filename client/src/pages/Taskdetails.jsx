@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { tasks } from "../assets/data";
 import Tabs from "../components/Tabs";
-import { PRIOTITYSTYELS, TASK_TYPE } from "../utils";
+import { getInitials, PRIOTITYSTYELS, TASK_TYPE } from "../utils";
 
 const assets = [
   "https://images.pexels.com/photos/2418664/pexels-photo-2418664.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -128,8 +128,68 @@ const act_types = [
                           <span>{task?.subTasks?.length}</span>
                         </div>
                       </div>
+
+                      <div className='space-y-4 py-6'>
+                        <p className='text-gray-600 font-semibold test-sm'>
+                          TASK TEAM
+                        </p>
+                        <div className='space-y-3'>
+                          {task?.team?.map((m, index) => (
+                            <div
+                              key={index}
+                              className='flex gap-4 py-2 items-center border-t border-gray-200'
+                            >
+                              <div
+                                className={
+                                  "w-10 h-10 rounded-full text-white flex items-center justify-center text-sm -mr-1 bg-blue-600"
+                                }
+                              >
+                                <span className='text-center '>
+                                  {getInitials(m?.name)}
+                                </span>
+                              </div>
+                              <div>
+                                <p className='text-lg font-semibold text-white'>{m?.name}</p>
+                                <span className='text-gray-500'>{m?.title}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className='space-y-4 py-6'>
+                        <p className='text-gray-500 font-semibold text-sm'>
+                          SUB-TASKS
+                        </p>
+                        <div className='space-y-8'>
+                          {task?.subTasks?.map((el, index) => (
+                            <div key={index} className='flex gap-3'>
+                              <div className='w-10 h-10 flex items-center justify-center rounded-full bg-violet-50-200'>
+                                <MdTaskAlt className='text-violet-600' size={26} />
+                              </div>
+
+                              <div className='space-y-1'>
+                                <div className='flex gap-2 items-center'>
+                                  <span className='text-sm text-gray-500'>
+                                    {new Date(el?.date).toDateString()}
+                                  </span>
+
+                                  <span className='px-2 py-0.5 text-center text-sm rounded-full bg-violet-100 text-violet-700 font-semibold'>
+                                    {el?.tag}
+                                  </span>
+                                </div>
+
+                                <p className='text-gray-700'>{el?.title}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                       
                     </div>
+
+                    {/* Right Side  */}
+                    
 
                   </div>
                 </>
