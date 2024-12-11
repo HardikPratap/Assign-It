@@ -88,7 +88,7 @@ const act_types = [
 
   const {id} = useParams()
   const [selected , setSelected]=useState(0)
-  const task = tasks[0]
+  const task = tasks[3]
    return (
      <div className='w-full flex flex-col gap-3 mb-4 overflow-y-hidden'>
          <h1 className='text-2xl text-gray-600 font-bold'>{task?.title}</h1>
@@ -189,8 +189,21 @@ const act_types = [
                     </div>
 
                     {/* Right Side  */}
-                    
+                    <div className='w-full md:w-1/2 space-y-8'>
+                      <p className='text-lg font-semibold'>ASSETS</p>
 
+                      <div className='w-full grid grid-cols-2 gap-4'>
+                        {task?.assets?.map((el, index) => (
+                          <img
+                            key={index}
+                            src={el}
+                            alt={task?.title}
+                            className='w-full rounded h-28 md:h-36 2xl:h-52 cursor-pointer transition-all duration-700 hover:scale-125 hover:z-50'
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    
                   </div>
                 </>
               ):(
