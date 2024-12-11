@@ -18,6 +18,7 @@ import { tasks } from "../assets/data";
 import Tabs from "../components/Tabs";
 import { getInitials, PRIOTITYSTYELS, TASK_TYPE } from "../utils";
 import Button from "../components/Button";
+import Loader from "../components/Loader";
 
 
 const assets = [
@@ -292,7 +293,7 @@ function Activities  ({ activity, id }) {
             className='bg-white w-full mt-10 border border-gray-300 outline-none p-4 rounded-md focus:ring-2 ring-blue-500'
           ></textarea>
           {isLoading ? (
-            <Loading />
+            <Loader />
           ) : (
             <Button
               type='button'

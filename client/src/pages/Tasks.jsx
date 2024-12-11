@@ -31,7 +31,7 @@ function Tasks() {
 
     const params = useParams()
     const status = params?.status || "";
-    const [selected , setSelected]= useState()
+    const [selected , setSelected]= useState(0)
     const [open, setOpen]= useState(false)
     const [loading ,setLoading] = useState(false)
 

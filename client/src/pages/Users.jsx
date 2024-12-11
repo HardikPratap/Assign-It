@@ -6,6 +6,8 @@ import Title from "../components/Title";
 import { IoMdAdd } from "react-icons/io";
 import { summary } from "../assets/data";
 import Button from "../components/Button";
+import AddUser from "../components/AddUser";
+import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
 
 
 const Users = () => {
@@ -58,7 +60,7 @@ const Users = () => {
 
       <td>
         <button
-          // onClick={() => userStatusClick(user)}
+          onClick={() => userStatusClick(user)}
           className={clsx(
             "w-fit px-4 py-1 rounded-full",
             user?.isActive ? "bg-blue-200" : "bg-yellow-100"
@@ -113,7 +115,7 @@ const Users = () => {
         </div>
       </div>
 
-      {/* <AddUser
+      <AddUser
         open={open}
         setOpen={setOpen}
         userData={selected}
@@ -126,11 +128,11 @@ const Users = () => {
         onClick={deleteHandler}
       />
 
-      <UserAction
+      <UserAction 
         open={openAction}
         setOpen={setOpenAction}
         onClick={userActionHandler}
-      /> */}
+      />
     </>
   );
 };
