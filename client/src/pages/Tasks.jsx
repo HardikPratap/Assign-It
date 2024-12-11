@@ -12,6 +12,7 @@ import BoardView from '../components/BoardView';
 import { tasks } from '../assets/data';
 import TableView from '../components/ListView';
 import ListView from '../components/ListView';
+import AddTask from '../components/Task/AddTask';
 
 
 const TABS = [
@@ -65,6 +66,8 @@ function Tasks() {
                         selected !== 1 ? ( <BoardView tasks={tasks} />) : (<div className='w-full'><ListView tasks={tasks}/> </div>)
                     }
                     </Tabs>
+
+                    <AddTask open={open} setOpen={setOpen} />
                 </div>
 
             </div>
