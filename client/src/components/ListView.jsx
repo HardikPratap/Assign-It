@@ -11,6 +11,7 @@ import { FaList } from "react-icons/fa";
 import UserInfo from "./UserInfo";
 import clsx from "clsx";
 import Button from "./Button";
+import ConfirmatioDialog from "./Dialogs";
 
 
 const ICONS = {
@@ -137,11 +138,11 @@ const ListView = ({ tasks }) => {
       </div>
 
       {/* TODO */}
-      {/* <ConfirmatioDialog
+      <ConfirmatioDialog
         open={openDialog}
         setOpen={setOpenDialog}
         onClick={deleteHandler}
-      /> */}
+      />
     </>
   );
 };

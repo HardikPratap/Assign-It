@@ -46,7 +46,7 @@ function AddTask({open, setOpen}) {
                 >
                     {task ? "UPDATE TASK" : "ADD TASK"}
                 </DialogTitle>
-                <div className='mt-2 flex flex-col gap-6'>
+                <div className='mt-2 flex flex-col gap-6 '>
                     <Textbox
                     placeholder='Task Title'
                     type='text'

@@ -9,6 +9,7 @@ import { FaList } from 'react-icons/fa';
 import UserInfo from './UserInfo';
 import { tasks } from '../assets/data';
 import { IoMdAdd } from 'react-icons/io';
+import AddSubTask from './Task/AddsubTask';
 
 const ICONS = {
     high: <MdKeyboardDoubleArrowUp />,
@@ -19,7 +20,7 @@ const ICONS = {
 
 function TaskCard({task}) {
     const {user} = useSelector((state)=> state.auth);
-    const [open , isOpen] = useState(false)
+    const [open , setOpen] = useState(false)
   return (
     <>
         <div className='w-full h-fit bg-white shadow-md p-4 rounded'>
@@ -106,7 +107,7 @@ function TaskCard({task}) {
             </div>
       </div>
 
-      {/* <AddSubTask open={open} setOpen={setOpen} id={task._id} /> */}
+      <AddSubTask open={open} setOpen={setOpen} id={task._id} />
     </>
     
   )
