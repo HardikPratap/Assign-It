@@ -75,7 +75,7 @@ const NotificationPanel = () => {
       <Popover className='relative'>
         <PopoverButton className='inline-flex items-center outline-none'>
           <div className='w-8 h-8 flex items-center justify-center text-gray-800 relative'>
-            <IoIosNotificationsOutline className='text-2xl' />
+            <IoIosNotificationsOutline className='text-2xl text-white' />
             {data?.length > 0 && (
               <span className='absolute text-center top-0 right-1 text-sm text-white font-semibold w-4 h-4 rounded-full bg-red-600'>
                 {data?.length}
@@ -96,7 +96,7 @@ const NotificationPanel = () => {
           <PopoverPanel className='absolute -right-16 md:-right-2 z-10  flex w-screen max-w-max  px-4'>
             {({ close }) =>
               data?.length > 0 && (
-                <div className='w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-black text-sm leading-6 shadow-lg ring-1 ring-gray-900/5'>
+                <div className='w-screen max-w-md flex-auto overflow-hidden rounded-3xl border border-white/5 bg-neutral-900 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5'>
                   <div className='p-4'>
                     {data?.slice(0, 5).map((item, index) => (
                       <div

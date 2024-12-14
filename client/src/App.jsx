@@ -26,7 +26,7 @@ function Layout(){
 
   return user?(
     <div className='w-full h-screen flex flex-col md:flex-row'>
-      <div className='w-1/5 h-screen bg-gray-700
+      <div className='w-[18%] h-screen bg-black 
        bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50  sticky top-0 hidden  md:block'>
         <Sidebar />
       </div>
@@ -73,7 +73,7 @@ const MobileSidebar = () => {
           <div
             ref={(node) => (mobileMenuRef.current = node)}
             className={clsx(
-              "md:hidden w-full h-full bg-black/40 transition-all duration-500 transform items-center ",
+              "md:hidden w-full h-full dark:bg-black/40  transition-all duration-500 transform items-center ",
               isSidebarOpen ? "translate-x-0" : "translate-x-full"
             )}
             onClick={(e) => {
@@ -81,7 +81,7 @@ const MobileSidebar = () => {
               closeSidebar();
             }}
           >
-            <div className="bg-white w-3/4 h-full">
+            <div className="light:bg-white dark:bg-black w-3/4 h-full shadow-[1px_0px_10px_0px_#5c5c5c]">
               <div className="w-full flex justify-end px-5">
                 <button onClick={closeSidebar} className="flex justify-end items-end">
                   <IoClose size={25} />

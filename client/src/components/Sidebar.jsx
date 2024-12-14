@@ -71,7 +71,7 @@ function Sidebar() {
             to={el.link}
             onClick={closeSidebar}    
             className={clsx(
-                "w-full lg:w-3/4 flex gap-2 px-4 py-2 rounded-full items-center text-black font-medium text-base hover:bg-[#2564ed2d]",
+                "w-full lg:w-[85%] flex gap-2 px-4 py-2 rounded-full items-center light:text-black dark:text-white font-medium text-base hover:bg-[#2564ed2d]",
                 path === el.link.split("/")[0] ? "bg-blue-700 text-neutral-100 hover:bg-blue-700" : ""
             )}
         >
@@ -83,23 +83,24 @@ function Sidebar() {
 
 
   return (
-    <div className='w-full h-full flex flex-col'>
+    <div className='w-full h-full flex flex-col '>
         <h1 className='flex gap-2 items-center pt-5 ml-5'>
             <p className='bg-blue-600 p-2 rounded-full'>
             <MdOutlineAddTask className='text-white text-2xl font-black' />
             </p>
-            <span className='text-2xl font-bold text-black'>AssignIt</span>
+            <span className='text-2xl font-bold light:text-black dark:text-white'>AssignIt</span>
         </h1>
-        
-        <div className='flex-1 flex flex-col gap-y-5 py-8 pl-2'>
+
+
+        <div className='flex-1 flex flex-col gap-y-5 py-8 pl-2 shadow-[0px_2px_5px_0px_#5c5c5c]'>
             {sidebarLinks.map(link=>
                 (
                     <Navlink el={link} key={link.label} />
                 ))}
         </div>
 
-        <div className=''>
-        <button className='w-full flex gap-2 p-2 items-center text-lg text-black font-medium'>
+        <div className='shadow-[1px_2px_5px_0px_#5c5c5c]'>
+        <button className='w-full flex gap-2 p-2 items-center text-lg light:text-black dark:text-white font-medium'>
           <MdSettings />
           <span>Settings</span>
         </button>
