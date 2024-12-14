@@ -7,7 +7,7 @@ const World = dynamic(() => import("./globe").then((m) => m.World), {
   ssr: false,
 });
 
-export const  globeDemo= memo(()=> {
+export const  GlobeDemo= memo(()=> {
   const globeConfig = {
     pointSize: 4,
     globeColor: "#062056",
