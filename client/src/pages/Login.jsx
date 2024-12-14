@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import Textbox from '../components/TextBox';
 import  Button  from '../components/Button';
-import { GlobeDemo } from '../components/ui/globeDemo';
+import  {GlobeDemo}  from '../components/ui/GlobeDemo';
+
 import { useSelector } from 'react-redux';
 
 
