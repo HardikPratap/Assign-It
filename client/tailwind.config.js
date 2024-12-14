@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "text-neutral-200",
-        secondary: "text-neural-400",
-        third: "text-neural-600",
+        primary: "#e2e8f0",
+        secondary: "#94a3b8",
+        third: "#475569",
       },
       transitionDelay: {
         "-300": "-300ms",
@@ -19,3 +19,5 @@ export default {
   },
   plugins: [],
 };
+
+// border border-white/5 bg-neutral-900

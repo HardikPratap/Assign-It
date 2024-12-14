@@ -3,7 +3,7 @@ import React from 'react'
 
 function Title({title , className}) {
   return (
-    <h2 className={clsx("text-2xl font-semibold capitalize text-white",className)}>
+    <h2 className={clsx("text-2xl font-semibold capitalize text-primary",className)}>
       {title}
     </h2>
   )

@@ -6,7 +6,7 @@ const Tabs = ({ tabs, setSelected, children }) => {
   return (
     <div className="w-full px-1 sm:px-0">
       <TabGroup>
-        <TabList className="flex space-x-6 rounded-xl p-1">
+        <TabList className="flex space-x-6 rounded-xl  p-1">
           {tabs.map((tab, index) => (
             <Tab as={Fragment} key={tab.title}>
               {({ hover, selected }) => (

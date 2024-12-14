@@ -23,7 +23,7 @@ function TaskCard({task}) {
     const [open , setOpen] = useState(false)
   return (
     <>
-        <div className='w-full h-fit bg-white shadow-md p-4 rounded'>
+        <div className='w-full h-fit  border border-white/5 dark:bg-neutral-900 light:bg-neutral-200 shadow-md p-4 rounded'>
             <div className='w-full flex justify-between'>
                 <div className={clsx("flex flex-1 gap-1 items-center text-sm font-medium",PRIOTITYSTYELS[task?.priority])}>
                     <span className='text-lg'>{ICONS[task?.priority]}</span>
@@ -35,14 +35,14 @@ function TaskCard({task}) {
             <>
                 <div className='flex items-center gap-2'>
                 <div className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}/>
-                    <h4 className='line-clamp-1 text-black'>{task?.title}</h4>
+                    <h4 className='line-clamp-1 light:text-black dark:text-primary'>{task?.title}</h4>
                 </div>
-                <span className='text-sm text-gray-600'>{formatDate(new Date(task?.date))} </span>
+                <span className='text-sm light:text-gray-600 dark:text-secondary'>{formatDate(new Date(task?.date))} </span>
             </>
 
-            <div className='w-full border-t border-gray-200 my-2' />
+            <div className='w-full border-t border-secondary my-2' />
                 <div className='flex items-center gap-3'>
-                    <div className='flex gap-1 items-center text-sm text-gray-600'>
+                    <div className='flex gap-1 items-center text-sm light:text-gray-600 dark:text-third'>
                         <BiMessageAltDetail />
                         <span>{task?.activities?.length}</span>
                     </div>
@@ -73,8 +73,8 @@ function TaskCard({task}) {
             {/* Sub Tasks  */}
 
             {task?.subTasks?.length > 0 ? (
-                <div className='py-4 border-t border-gray-200'>
-                    <h5 className='text-base line-clamp-1 text-black'>
+                <div className='py-4 border-t border-secondary'>
+                    <h5 className='text-base line-clamp-1 text-secondary'>
                         {task?.subTasks[0].title}
                     </h5>
 
@@ -99,7 +99,7 @@ function TaskCard({task}) {
                 <button
                     onClick={() => setOpen(true)}
                     disabled={user.isAdmin ? false : true}
-                    className='w-full flex gap-4 items-center text-sm text-gray-500 font-semibold disabled:cursor-not-allowed disabled::text-gray-300'
+                    className='w-full flex gap-4 items-center text-sm text-gray-400 font-semibold disabled:cursor-not-allowed disabled::text-gray-300'
                 >
                     <IoMdAdd className='text-lg' />
                     <span>ADD SUBTASK</span>

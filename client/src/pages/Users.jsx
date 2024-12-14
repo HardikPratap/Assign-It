@@ -31,7 +31,7 @@ const Users = () => {
 
   const TableHeader = () => (
     <thead className='border-b border-gray-300'>
-      <tr className='text-black text-left'>
+      <tr className='light:text-black dark:text-primary text-left'>
         <th className='py-2'>Full Name</th>
         <th className='py-2'>Title</th>
         <th className='py-2'>Email</th>
@@ -42,7 +42,7 @@ const Users = () => {
   );
 
   const TableRow = ({ user }) => (
-    <tr className='border-b border-gray-200 text-gray-600 hover:bg-gray-400/10'>
+    <tr className='border-b border-gray-200 light:text-gray-600 dark:text-secondary hover:bg-gray-400/10'>
       <td className='p-2'>
         <div className='flex items-center gap-3'>
           <div className='w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-blue-700'>
@@ -62,7 +62,7 @@ const Users = () => {
         <button
           onClick={() => userStatusClick(user)}
           className={clsx(
-            "w-fit px-4 py-1 rounded-full",
+            "w-fit px-4 py-1 rounded-full text-third",
             user?.isActive ? "bg-blue-200" : "bg-yellow-100"
           )}
         >
@@ -101,7 +101,7 @@ const Users = () => {
           />
         </div>
 
-        <div className='bg-white px-2 md:px-4 py-4 shadow-md rounded'>
+        <div className='border border-white/5 bg-neutral-900 px-2 md:px-4 py-4 shadow-md rounded'>
           <div className='overflow-x-auto'>
             <table className='w-full mb-5'>
               <TableHeader />

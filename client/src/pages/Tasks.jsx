@@ -52,7 +52,7 @@ function Tasks() {
                     )}
                 </div>
 
-                <div className='text-white'>
+                <div className='text-primary'>
                     <Tabs tabs={TABS} setSelected={setSelected} >
                     {!status && (
                             <div className='w-full flex justify-between gap-4 md:gap-x-10 py-4'>

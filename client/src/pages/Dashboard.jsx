@@ -20,7 +20,7 @@ import TaskTable from '../components/Task/TaskTable';
 function UserTable({users}){
   const TableHeader = () => (
     <thead className='border-b border-gray-300 '>
-      <tr className='text-white  text-left text-xs text-wrap'>
+      <tr className='text-primary  text-left text-xs text-wrap'>
         <th className='py-2'>Full Name</th>
         <th className='py-2'>Status</th>
         <th className='py-2 '>Created At</th>
@@ -30,16 +30,16 @@ function UserTable({users}){
 
 
   const TableRow =({user})=>(
-   <tr className='border-b border-gray-700  text-gray-300 hover:bg-gray-400/10'>
+   <tr className='border-b border-gray-700  text-neutral-300 hover:bg-gray-400/10'>
       <td className='py-2'>
         <div className='flex items-center gap-3'>
-          <div className='w-9 h-9 rounded-full text-white flex items-center justify-center text-xs bg-violet-700'>
+          <div className='w-9 h-9 rounded-full text-primary flex items-center justify-center text-xs bg-violet-700'>
             <span className='text-center'>{getInitials(user?.name)}</span>
           </div>
 
           <div>
             <p className='text-s'> {user.name}</p>
-            <span className='text-xs text-black'>{user?.role}</span>
+            <span className='text-xs text-secondary'>{user?.role}</span>
           </div>
           <div>
           </div>
@@ -61,7 +61,7 @@ function UserTable({users}){
   )
 
   return (
-    <div className='w-full md:w-1/3 bg-gray-700 h-fit px-2 md:px-6 py-4 shadow-md rounded'>
+    <div className='w-full md:w-1/3 border border-white/5 bg-neutral-900 h-fit px-2 md:px-6 py-4 shadow-md rounded'>
     <table className='w-full mb-5'>
       <TableHeader />
       <tbody>
@@ -112,7 +112,7 @@ function Dashboard() {
 
   const Card= ({icon,bg,label,count})=>{
     return (
-      <div className='w-full h-32 bg-gray-700 p-5 shadow-md rounded-md flex items-center justify-between'>
+      <div className='w-full h-32 border border-white/5 bg-neutral-900 p-5 shadow-md rounded-md flex items-center justify-between'>
         <div className='h-full flex flex-1 flex-col justify-between'>
           <p className='text-base text-neutral-300'>{label}</p>
           <span className='text-2xl font-semibold'>{count}</span>
@@ -141,7 +141,7 @@ function Dashboard() {
         }
       </div>
 
-      <div className='w-full bg-gray-700 my-16 p-4 rounded shadow-sm'>
+      <div className='w-full border border-white/5 bg-neutral-900 my-16 p-4 rounded shadow-sm'>
         <h4 className='text-xl text-white font-semibold'>
           Chart by Priority
         </h4>

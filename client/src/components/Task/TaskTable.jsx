@@ -20,7 +20,7 @@ function TaskTable({tasks,className}) {
   
     const TableHeader= ()=>(
       <thead className='border-b border-gray-300 '>
-        <tr className='text-black text-left'>
+        <tr className='text-primary text-left'>
           <th className='py-2'>Task Title</th>
           <th className='py-2'>Priority</th>
           <th className='py-2'>Team</th>
@@ -30,7 +30,7 @@ function TaskTable({tasks,className}) {
     )
   
     const TableRow= ({task , className})=>(
-      <tr className={clsx("border-b border-gray-500 text-gray-600 hover:bg-gray-300/10 ", className)}>
+      <tr className={clsx("border-b border-gray-500  hover:bg-gray-300/10 ", className)}>
         <td className='py-2'>
           <div className='flex items-center gap-2'>
             <div  className= {clsx("w-4 h-4 rounded-full" ,TASK_TYPE[task.stage])}/>
@@ -73,13 +73,13 @@ function TaskTable({tasks,className}) {
   
     )
   
-    return <div className={clsx("w-full md:w-2/3 bg-gray-700 px-2 md:px-4 pt-4 pb-4 shadow-md rounded",className)}>
+    return <div className={clsx("w-full md:w-2/3 border border-white/5 bg-neutral-900 px-2 md:px-4 pt-4 pb-4 shadow-md rounded",className)}>
       <table>
         <TableHeader />
         <tbody>
           {
             tasks.map((task,id)=>(
-              <TableRow key={id} task={task} className={"text-neutral-800"} />
+              <TableRow key={id} task={task} className={"text-neutral-300"} />
             ))
           }
         </tbody>
