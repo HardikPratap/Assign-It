@@ -93,15 +93,15 @@ function Sidebar() {
         </h1>
 
 
-        <div className='flex-1 flex flex-col gap-y-5 py-8 pl-2 shadow-[0px_2px_5px_0px_#5c5c5c]'>
+        <div className='flex-1 flex flex-col gap-y-5 py-8 pl-2 '>
             {sidebarLinks.map(link=>
                 (
                     <Navlink el={link} key={link.label} />
                 ))}
         </div>
 
-        <div className='shadow-[1px_2px_5px_0px_#5c5c5c]'>
-        <button className='w-full flex gap-2 p-2 items-center text-lg light:text-black dark:text-white font-medium'>
+        <div className='shadow-[1px_2px_10px_1px_#5c5c5c] pl-2'>
+        <button className='w-full flex gap-2 p-2  items-center text-lg light:text-black dark:text-white font-medium'>
           <MdSettings />
           <span>Settings</span>
         </button>

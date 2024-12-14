@@ -63,7 +63,7 @@ function Tasks() {
                         )
                     }
                     {
-                        selected !== 1 ? ( <BoardView tasks={tasks} />) : (<div className='w-full'><ListView tasks={tasks}/> </div>)
+                        selected !== 1 ? ( <BoardView tasks={tasks} />) : (<div className='w-full flex justify-center'><ListView tasks={tasks}/> </div>)
                     }
                     </Tabs>
 
