@@ -13,11 +13,6 @@ import clsx from 'clsx';
 
   const linkData = [
     {
-      label: "Dashboard",
-      link: "dashboard",
-      icon: <MdDashboard />,
-    },
-    {
       label: "Tasks",
       link: "tasks",
       icon: <FaTasks />,
@@ -38,10 +33,16 @@ import clsx from 'clsx';
       icon: <MdOutlinePendingActions />,
     },
     {
+      label: "Dashboard",
+      link: "dashboard",
+      icon: <MdDashboard />,
+    },
+    {
       label: "Team",
       link: "team",
       icon: <FaUsers />,
     },
+   
     {
       label: "Trash",
       link: "trashed",
