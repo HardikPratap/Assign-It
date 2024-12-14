@@ -9,7 +9,7 @@ import { FaList } from 'react-icons/fa';
 import UserInfo from './UserInfo';
 import { tasks } from '../assets/data';
 import { IoMdAdd } from 'react-icons/io';
-import AddSubTask from './Task/AddsubTask';
+import AddSubTask from './Task/AddSubTask';
 
 const ICONS = {
     high: <MdKeyboardDoubleArrowUp />,
