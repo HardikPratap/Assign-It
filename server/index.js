@@ -6,12 +6,13 @@ import morgan from "morgan";
 import dbConnection from "./utils/index.js";
 import { errorHandler, routeNotFound } from "./middlewares/errorMiddleware.js";
 
+import routes from "./routes/index.js";
+
 env.config();
 dbConnection();
 
 const PORT = process.env.PORT || 8000;
 const app = express();
-const routes = "";
 
 app.use(
   cors({
@@ -27,7 +28,7 @@ app.use(cookieParser());
 
 app.use(morgan("dev")); // http req logger
 
-// app.use("/api/v1", routes);
+app.use("/api/v1", routes);
 
 app.use(routeNotFound);
 app.use(errorHandler);
