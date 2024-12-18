@@ -2,14 +2,15 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/User.js";
 
-const protectRoute = (req, res, next) => {
+const protectRoute = async (req, res, next) => {
   try {
-    let token = req.cookie.token;
+    let token = req.cookies?.token;
 
     if (token) {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const response = UserModel.find(decoded.userId).select("isAdmin email");
-
+      const response = await UserModel.findById(decoded.userId).select(
+        "isAdmin email"
+      );
       req.user = {
         email: response.email,
         isAdmin: response.isAdmin,
@@ -30,7 +31,7 @@ const protectRoute = (req, res, next) => {
 };
 
 const isAdminRoute = (req, res, next) => {
-  if (req.user && res.user.isAdmin) {
+  if (req.user && req.user.isAdmin) {
     next();
   } else {
     return res.status(401).json({
