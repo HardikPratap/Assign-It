@@ -106,7 +106,7 @@ function App() {
     <main className='w-full min-h-screen bg-black '>
       <Routes>
         <Route element={<Layout />}>
-          <Route index path='/' element={<Navigate to='/dashboard' />} />
+          <Route index path='/' element={<Navigate to='/tasks' />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/tasks' element={<Tasks />} />
           <Route path='/completed/:status' element={<Tasks />} />
