@@ -7,6 +7,8 @@ import  Button  from '../components/Button';
 import  {GlobeDemo}  from '../components/ui/GlobeDemo';
 
 import { useSelector } from 'react-redux';
+import { useLoginMutation } from '../redux/splice/api/authApiSlice.js';
+import { toast } from 'sonner';
 
 
 function Login() {
@@ -17,10 +19,18 @@ function Login() {
     
 
     const navigate = useNavigate();
+    const [login, {isLoading}]= useLoginMutation()
     const submitHandler = async (data) => {
-        console.log("submit");
+        console.log(data)
+        try{
+            const result= await login(data).unwrap()
+            console.log("submited data: " + result);
+        }catch(e){
+            console.log(e)
+            toast.error(e?.data?.message || e.message)
+
+        }
       };
-      console.log(user)
     
       useEffect(() => {
         user && navigate("/dashboard");
@@ -36,23 +46,25 @@ function Login() {
             >
                 <div className='font-sans font-bold text-5xl'>Login</div>
                 <div className='text-sm font-normal mt-4 text-gray-400'>How to i get started lorem ipsum dolor at?</div>
+
                 <Textbox
                         placeholder='email@example.com'
                         type='email'
                         name='email'
                         // label='Email Address'
-                        className='h-10 w-80 '
+                        className='h-10 w-80 pl-3 text-sm rounded-lg mt-8 bg-neutral-300 text-black placeholder-third '
                         register={register("email", {
                         required: "Email Address is required!",
                         })}
                         error={errors.email ? errors.email.message : ""}
                     />
-                     <Textbox
+
+                <Textbox
                         placeholder='Password'
                         type='password'
                         name='password'
                         // label='Password'
-                        className='h-10 w-80 '
+                        className='pl-3 text-sm  mt-8 h-10 w-80 rounded-lg bg-neutral-300 text-black placeholder-third '
                         register={register("password", {
                         required: "Password is required!",
                         })}
@@ -68,12 +80,12 @@ function Login() {
                     label="Login"
                 />
 
+            </form>
 
                 <div className="inline-flex items-center justify-center w-full">
                     <hr className="w-1/2 h-1 my-8 bg-gray-200 border-0 dark:bg-gray-700"/>
                     <span className="absolute px-3 font-medium bg-transparent justify-center text-white dark:bg-black">Login <span className='text-xs text-gray-400'>with Others</span></span>
                 </div>
-            </form>
         </div>
 
 
