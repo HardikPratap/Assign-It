@@ -6,9 +6,11 @@ import Textbox from '../components/TextBox';
 import  Button  from '../components/Button';
 import  {GlobeDemo}  from '../components/ui/GlobeDemo';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '../redux/splice/api/authApiSlice.js';
 import { toast } from 'sonner';
+import { setCredentials } from '../redux/splice/authSplice';
+import Loader from '../components/Loader.jsx';
 
 
 function Login() {
@@ -19,12 +21,16 @@ function Login() {
     
 
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const [login, {isLoading}]= useLoginMutation()
+
     const submitHandler = async (data) => {
         console.log(data)
         try{
             const result= await login(data).unwrap()
-            console.log("submited data: " + result);
+            dispatch(setCredentials(result))
+            console.log("submited data: " + result); 
+            navigate("/")
         }catch(e){
             console.log(e)
             toast.error(e?.data?.message || e.message)
@@ -75,10 +81,10 @@ function Login() {
                     </div>
 
                 
-                <Button type='submit' 
+                {isLoading ? (<Loader />) : (<Button type='submit' 
                     className='mt-10  h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200 bg-gradient-to-tl from-gray-500 to-white text-white'
                     label="Login"
-                />
+                />)}
 
             </form>
 
