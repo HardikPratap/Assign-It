@@ -8,6 +8,9 @@ import { summary } from "../assets/data";
 import Button from "../components/Button";
 import AddUser from "../components/AddUser";
 import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
+import { useDeleteuserMutation, useGetTeamListQuery, useUpdateuserMutation, useUserActionMutation } from "../redux/splice/api/userApiSlice";
+import { toast } from "sonner";
+import { isAction } from "@reduxjs/toolkit";
 
 
 const Users = () => {
@@ -16,7 +19,28 @@ const Users = () => {
   const [openAction, setOpenAction] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  const userActionHandler = () => {};
+  const{data , isLoading , refetch}= useGetTeamListQuery()
+  const[deleteUser]= useDeleteuserMutation()
+  const[userAction]= useUserActionMutation()
+
+  const userActionHandler = async() => {
+    try{
+      const result= await userAction({
+        isActive : !selected?.isActive,
+        id: selected?._id,
+      });
+
+      refetch()
+      setTimeout(() => {
+        setOpenAction(false)
+      }, 500);
+      toast.success(result.data.message)
+
+    }catch(error){
+      console.log(error);
+      toast.error(error?.data?.message || error)
+    }
+  };
   const deleteHandler = () => {};
 
   const deleteClick = (id) => {
@@ -106,7 +130,7 @@ const Users = () => {
             <table className='w-full mb-5'>
               <TableHeader />
               <tbody>
-                {summary.users?.map((user, index) => (
+                {data?.map((user, index) => (
                   <TableRow key={index} user={user} />
                 ))}
               </tbody>
