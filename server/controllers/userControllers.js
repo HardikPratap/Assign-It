@@ -138,7 +138,7 @@ export const updateUserProfile = async (req, res) => {
       user.name = req.body.name || user.name;
       user.title = req.body.title || user.title;
       user.role = req.body.role || user.role;
-      const updateUser = await UserModel.save();
+      const updatedUser = await user.save();
 
       user.password = undefined;
 
@@ -220,7 +220,7 @@ export const activateUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const user = await User.findById(id);
+    const user = await UserModel.findById(id);
 
     if (user) {
       user.isActive = req.body.isActive; //!user.isActive
@@ -241,12 +241,14 @@ export const activateUserProfile = async (req, res) => {
     return res.status(400).json({ status: false, message: error.message });
   }
 };
-
 export const deleteUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await User.findByIdAndDelete(id);
+    // const result = await UserModel.findById(id);
+    // console.log(result);
+
+    await UserModel.findByIdAndDelete(id);
 
     res
       .status(200)

@@ -8,7 +8,7 @@ import { summary } from "../assets/data";
 import Button from "../components/Button";
 import AddUser from "../components/AddUser";
 import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
-import { useDeleteuserMutation, useGetTeamListQuery, useUpdateuserMutation, useUserActionMutation } from "../redux/splice/api/userApiSlice";
+import { useDeleteUserMutation, useGetTeamListQuery, useUpdateUserMutation, useUserActionMutation } from "../redux/splice/api/userApiSlice";
 import { toast } from "sonner";
 import { isAction } from "@reduxjs/toolkit";
 
@@ -20,28 +20,54 @@ const Users = () => {
   const [selected, setSelected] = useState(null);
 
   const{data , isLoading , refetch}= useGetTeamListQuery()
-  const[deleteUser]= useDeleteuserMutation()
+  const[deleteUser]= useDeleteUserMutation()
   const[userAction]= useUserActionMutation()
 
   const userActionHandler = async() => {
+    if (!selected || !selected._id) {
+      toast.error("No user selected for the action.");
+      return;
+    }
     try{
+      console.log("isActive: "+!selected?.isActive )
+      console.log("id: "+selected?._id )
       const result= await userAction({
         isActive : !selected?.isActive,
         id: selected?._id,
       });
-
-      refetch()
+     
+      toast.success(result.data.message)
+      await refetch()
+      setSelected(null)
       setTimeout(() => {
         setOpenAction(false)
       }, 500);
-      toast.success(result.data.message)
 
     }catch(error){
       console.log(error);
       toast.error(error?.data?.message || error)
     }
   };
-  const deleteHandler = () => {};
+  const deleteHandler = async() => {
+    try{
+      console.log("id: "+ selected)
+      const result= await deleteUser(
+        selected
+      );
+
+      toast.success(result.data.message)
+      await refetch()
+      setSelected(null)
+      setOpenDialog(false);
+      setTimeout(() => {
+        setOpenAction(false)
+      }, 500);
+
+    }catch(error){
+      console.log(error);
+      toast.error(error?.data?.message || error)
+    }
+  };
 
   const deleteClick = (id) => {
     setSelected(id);
@@ -52,6 +78,12 @@ const Users = () => {
     setSelected(el);
     setOpen(true);
   };
+
+  const userStatusClick= (el)=>{
+    setSelected(el)
+    setOpenAction(true)
+
+  }
 
   const TableHeader = () => (
     <thead className='border-b border-gray-300'>
