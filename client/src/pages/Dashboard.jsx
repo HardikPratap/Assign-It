@@ -6,7 +6,7 @@ import {
   MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
 import { summary, user } from "../assets/data";
-import { LuClipboardEdit } from "react-icons/lu";
+import { LuClipboardPen } from "react-icons/lu";
 import { FaNewspaper, FaUsers } from "react-icons/fa";
 import { FaArrowsToDot } from "react-icons/fa6";
 import moment from "moment";   // whats moment used for?
@@ -98,7 +98,7 @@ function Dashboard() {
       _id: "3",
       label: "TASK IN PROGRESS ",
       total: totals["in progress"] || 0,
-      icon: <LuClipboardEdit />,
+      icon: <LuClipboardPen />,
       bg: "bg-[#f59e0b]",
     },
     {
