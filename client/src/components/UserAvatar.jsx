@@ -9,6 +9,8 @@ import { getInitials } from '../utils';
 import { toast } from 'sonner';
 import { useLogoutMutation } from '../redux/splice/api/authApiSlice';
 import { logout } from '../redux/splice/authSplice';
+import AddUser from './AddUser';
+// import ChangePassword from './ChangePassword';
 
 
 function UserAvatar() {
@@ -82,6 +84,8 @@ function UserAvatar() {
 
         </Menu>
     </div>
+    <AddUser open={open} setOpen={setOpen} userData={user} />
+    {/* <ChangePassword open={openPassword} setOpen={setOpenPassword} /> */}
     </>
    )
 }

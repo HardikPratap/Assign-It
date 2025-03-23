@@ -50,41 +50,45 @@ function Login() {
                 onSubmit={handleSubmit(submitHandler)}
                 className='form-container w-full md:w-[400px] content-center text-center'
             >
-                <div className='font-sans font-bold text-5xl'>Login</div>
-                <div className='text-sm font-normal mt-4 text-gray-400'>How to i get started lorem ipsum dolor at?</div>
+                <div className='flex-col items-center justify-center'>
 
-                <Textbox
-                        placeholder='email@example.com'
-                        type='email'
-                        name='email'
-                        // label='Email Address'
-                        className='h-10 w-80 pl-3 text-sm rounded-lg mt-8 bg-neutral-300 text-black placeholder-third '
-                        register={register("email", {
-                        required: "Email Address is required!",
-                        })}
-                        error={errors.email ? errors.email.message : ""}
-                    />
+                    <div className='items-center justify-center w-full font-sans font-bold text-5xl'>Login</div>
+                    <div className='text-sm font-normal mt-4 text-gray-400'>How to i get started lorem ipsum dolor at?</div>
+                    
 
-                <Textbox
-                        placeholder='Password'
-                        type='password'
-                        name='password'
-                        // label='Password'
-                        className='pl-3 text-sm  mt-8 h-10 w-80 rounded-lg bg-neutral-300 text-black placeholder-third '
-                        register={register("password", {
-                        required: "Password is required!",
-                        })}
-                        error={errors.password ? errors.password.message : ""}
-                    />
-                    <div className='text-right mr-10 text-xs mt-2 text-gray-400 hover:cursor-pointer hover:text-blue-600 transition-colors  duration-200'>
-                        Forgot Password?
-                    </div>
+                    <Textbox
+                            placeholder='email@example.com'
+                            type='email'
+                            name='email'
+                            // label='Email Address'
+                            className='h-10 w-80 pl-3 text-sm rounded-lg mt-8 bg-neutral-300 text-white placeholder-third '
+                            register={register("email", {
+                            required: "Email Address is required!",
+                            })}
+                            error={errors.email ? errors.email.message : ""}
+                        />
 
-                
-                {isLoading ? (<Loader />) : (<Button type='submit' 
-                    className='mt-10  h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200 bg-gradient-to-tl from-gray-500 to-white text-white'
-                    label="Login"
-                />)}
+                    <Textbox
+                            placeholder='Password'
+                            type='password'
+                            name='password'
+                            // label='Password'
+                            className='pl-3 text-sm  mt-8 h-10 w-80 rounded-lg bg-neutral-300 text-white placeholder-third '
+                            register={register("password", {
+                            required: "Password is required!",
+                            })}
+                            error={errors.password ? errors.password.message : ""}
+                        />
+                        <div className='text-right mr-10 text-xs mt-2 text-gray-400 hover:cursor-pointer hover:text-blue-600 transition-colors  duration-200'>
+                            Forgot Password?
+                        </div>
+
+                    
+                    {isLoading ? (<Loader />) : (<Button type='submit' 
+                        className='mt-10  h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200 bg-gradient-to-tl from-gray-500 to-white text-white'
+                        label="Login"
+                    />)}
+                </div>
 
             </form>
 
