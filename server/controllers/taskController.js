@@ -1,6 +1,6 @@
-import NoticeModel from "../models/Notification.js";
-import TaskModel from "../models/Task.js";
-import UserModel from "../models/User.js";
+import NoticeModel from "../models/notification.js";
+import TaskModel from "../models/task.js";
+import UserModel from "../models/user.js";
 
 export const createTask = async (req, res) => {
   try {

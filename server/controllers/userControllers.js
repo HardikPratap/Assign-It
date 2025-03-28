@@ -1,13 +1,15 @@
-import NoticeModel from "../models/Notification.js";
-import UserModel from "../models/User.js";
+import { response } from "express";
+import UserModel from "../models/user.js";
 import { createJWT } from "../utils/index.js";
+import NoticeModel from "../models/notification.js";
 
 export const registerUser = async (req, res) => {
   try {
     const { name, email, password, isAdmin, role, title } = req.body;
-    const userExits = await UserModel.findOne({ email });
 
-    if (userExits) {
+    const userExist = await UserModel.findOne({ email });
+
+    if (userExist) {
       return res.status(400).json({
         status: false,
         message: "User already exists",
@@ -25,17 +27,18 @@ export const registerUser = async (req, res) => {
 
     if (user) {
       isAdmin ? createJWT(res, user._id) : null;
+
       user.password = undefined;
+
       res.status(201).json(user);
     } else {
-      return res.status(400).json({
-        status: false,
-        message: "Invalid User Data",
-      });
+      return res
+        .status(400)
+        .json({ status: false, message: "Invalid user data" });
     }
-  } catch (e) {
-    console.log(e);
-    return res.status(400).json({ status: false, message: e.message });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ status: false, message: error.message });
   }
 };
 
@@ -46,49 +49,48 @@ export const loginUser = async (req, res) => {
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({
-        status: false,
-        message: "User doesn't exists",
-      });
+      return res
+        .status(401)
+        .json({ status: false, message: "Invalid email or password." });
     }
+
     if (!user?.isActive) {
       return res.status(401).json({
         status: false,
-        message: "User account is not active",
+        message: "User account has been deactivated, contact the administrator",
       });
     }
 
-    const isMatched = await user.matchPassword(password);
+    const isMatch = await user.matchPassword(password);
 
-    if (user && isMatched) {
+    if (user && isMatch) {
       createJWT(res, user._id);
+
       user.password = undefined;
-      res.status(201).json(user);
+
+      res.status(200).json(user);
     } else {
-      return res.status(400).json({
-        status: false,
-        message: "Invalid User email or password",
-      });
+      return res
+        .status(401)
+        .json({ status: false, message: "Invalid email or password" });
     }
-  } catch (e) {
-    console.log(e);
-    return res.status(400).json({ status: false, message: e.message });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ status: false, message: error.message });
   }
 };
 
 export const logoutUser = async (req, res) => {
   try {
-    res.cookie("token", " ", {
-      httpOnly: true,
+    res.cookie("token", "", {
+      htttpOnly: true,
       expires: new Date(0),
     });
 
-    res.status(200).json({
-      message: "Logout Successful",
-    });
-  } catch (e) {
-    console.log(e);
-    return res.status(400).json({ status: false, message: e.message });
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ status: false, message: error.message });
   }
 };
 
@@ -109,17 +111,18 @@ export const getNotificationsList = async (req, res) => {
   try {
     const { userId } = req.user;
 
-    const notice = await NoticeModel.findOne({
+    const notice = await Notice.find({
       team: userId,
       isRead: { $nin: [userId] },
     }).populate("task", "title");
 
     res.status(201).json(notice);
-  } catch (e) {
-    console.log(e);
-    return res.status(400).json({ status: false, message: e.message });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ status: false, message: error.message });
   }
 };
+
 export const updateUserProfile = async (req, res) => {
   try {
     const { userId, isAdmin } = req.user;
@@ -138,6 +141,7 @@ export const updateUserProfile = async (req, res) => {
       user.name = req.body.name || user.name;
       user.title = req.body.title || user.title;
       user.role = req.body.role || user.role;
+
       const updatedUser = await user.save();
 
       user.password = undefined;
@@ -150,47 +154,39 @@ export const updateUserProfile = async (req, res) => {
     } else {
       res.status(404).json({ status: false, message: "User not found" });
     }
-  } catch (e) {
-    console.log(e);
-    return res.status(400).json({ status: false, message: e.message });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ status: false, message: error.message });
   }
 };
+
 export const markNotificationRead = async (req, res) => {
   try {
     const { userId } = req.user;
+
     const { isReadType, id } = req.query;
 
     if (isReadType === "all") {
       await NoticeModel.updateMany(
-        {
-          team: userId,
-          isRead: { $nin: [userId] },
-        },
-        {
-          $push: { isRead: userId },
-        },
-        {
-          new: true,
-        }
+        { team: userId, isRead: { $nin: [userId] } },
+        { $push: { isRead: userId } },
+        { new: true }
       );
     } else {
       await NoticeModel.findOneAndUpdate(
-        {
-          _id: id,
-          isRead: { $nin: [userId] },
-        },
-        {
-          $push: { isRead: userId },
-        }
+        { _id: id, isRead: { $nin: [userId] } },
+        { $push: { isRead: userId } },
+        { new: true }
       );
     }
 
     res.status(201).json({ status: true, message: "Done" });
-  } catch (e) {
-    console.log(e);
-    return res.status(400).json({ status: false, message: e.message });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ status: false, message: error.message });
   }
 };
+
 export const changeUserPassword = async (req, res) => {
   try {
     const { userId } = req.user;
@@ -216,6 +212,7 @@ export const changeUserPassword = async (req, res) => {
     return res.status(400).json({ status: false, message: error.message });
   }
 };
+
 export const activateUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
@@ -241,12 +238,10 @@ export const activateUserProfile = async (req, res) => {
     return res.status(400).json({ status: false, message: error.message });
   }
 };
+
 export const deleteUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
-
-    // const result = await UserModel.findById(id);
-    // console.log(result);
 
     await UserModel.findByIdAndDelete(id);
 
