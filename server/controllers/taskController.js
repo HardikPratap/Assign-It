@@ -1,6 +1,6 @@
-import NoticeModel from "../models/notification.js";
-import TaskModel from "../models/task.js";
-import UserModel from "../models/user.js";
+import Notice from "../models/notification.js";
+import Task from "../models/task.js";
+import User from "../models/user.js";
 
 export const createTask = async (req, res) => {
   try {
@@ -25,7 +25,7 @@ export const createTask = async (req, res) => {
       by: userId,
     };
 
-    const task = await TaskModel.create({
+    const task = await Task.create({
       title,
       team,
       stage: stage.toLowerCase(),
@@ -35,7 +35,7 @@ export const createTask = async (req, res) => {
       activities: activity,
     });
 
-    await NoticeModel.create({
+    await Notice.create({
       team,
       text,
       task: task._id,
@@ -54,9 +54,9 @@ export const duplicateTask = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const task = await TaskModel.findById(id);
+    const task = await Task.findById(id);
 
-    const newTask = await TaskModel.create({
+    const newTask = await Task.create({
       ...task,
       title: task.title + " - Duplicate",
     });
@@ -81,7 +81,7 @@ export const duplicateTask = async (req, res) => {
         task.priority
       } priority, so check and act accordingly. The task date is ${task.date.toDateString()}. Thank you!!!`;
 
-    await NoticeModel.create({
+    await Notice.create({
       team: task.team,
       text,
       task: newTask._id,
@@ -102,7 +102,7 @@ export const postTaskActivity = async (req, res) => {
     const { userId } = req.user;
     const { type, activity } = req.body;
 
-    const task = await TaskModel.findById(id);
+    const task = await Task.findById(id);
 
     const data = {
       type,
@@ -136,7 +136,7 @@ export const dashboardStatistics = async (req, res) => {
             select: "name role title email",
           })
           .sort({ _id: -1 })
-      : await TaskModel.find({
+      : await Task.find({
           isTrashed: false,
           team: { $all: [userId] },
         })
@@ -146,7 +146,7 @@ export const dashboardStatistics = async (req, res) => {
           })
           .sort({ _id: -1 });
 
-    const users = await UserModel.find({ isActive: true })
+    const users = await User.find({ isActive: true })
       .select("name title role isAdmin createdAt")
       .limit(10)
       .sort({ _id: -1 });
@@ -207,7 +207,7 @@ export const getTasks = async (req, res) => {
       query.stage = stage;
     }
 
-    let queryResult = TaskModel.find(query)
+    let queryResult = Task.find(query)
       .populate({
         path: "team",
         select: "name title email",
@@ -230,7 +230,7 @@ export const getTask = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const task = await TaskModel.findById(id)
+    const task = await Task.findById(id)
       .populate({
         path: "team",
         select: "name title role email",
@@ -262,7 +262,7 @@ export const createSubTask = async (req, res) => {
       tag,
     };
 
-    const task = await TaskModel.findById(id);
+    const task = await Task.findById(id);
 
     task.subTasks.push(newSubTask);
 
@@ -282,7 +282,7 @@ export const updateTask = async (req, res) => {
     const { id } = req.params;
     const { title, date, team, stage, priority, assets } = req.body;
 
-    const task = await TaskModel.findById(id);
+    const task = await Task.findById(id);
 
     task.title = title;
     task.date = date;
@@ -306,7 +306,7 @@ export const trashTask = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const task = await TaskModel.findById(id);
+    const task = await Task.findById(id);
 
     task.isTrashed = true;
 
@@ -328,9 +328,9 @@ export const deleteRestoreTask = async (req, res) => {
     const { actionType } = req.query;
 
     if (actionType === "delete") {
-      await TaskModel.findByIdAndDelete(id);
+      await Task.findByIdAndDelete(id);
     } else if (actionType === "deleteAll") {
-      await TaskModel.deleteMany({ isTrashed: true });
+      await Task.deleteMany({ isTrashed: true });
     } else if (actionType === "restore") {
       const resp = await Task.findById(id);
 
