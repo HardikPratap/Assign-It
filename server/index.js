@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 app.use(morgan("dev")); // http req logger
 
-app.use("/api/v1", routes);
+app.use("/api", routes);
 
 app.use(routeNotFound);
 app.use(errorHandler);
