@@ -3,10 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import morgan from "morgan";
-import dbConnection from "./utils/index.js";
 import { errorHandler, routeNotFound } from "./middlewares/errorMiddleware.js";
-
 import routes from "./routes/index.js";
+import { dbConnection } from "./utils/index.js";
 
 dotenv.config();
 
