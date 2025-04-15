@@ -5,6 +5,7 @@ import {
   deleteUserProfile,
   getNotificationsList,
   getTeamList,
+  getUserTaskStatus,
   loginUser,
   logoutUser,
   markNotificationRead,

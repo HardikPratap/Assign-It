@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
-import Notice from "../models/notis.js";
 import User from "../models/userModel.js";
-import createJWT from "../utils/index.js";
+import { createJWT } from "../utils/index.js";
+import Notice from "../models/Notification.js";
 
 // POST request - login user
 const loginUser = asyncHandler(async (req, res) => {

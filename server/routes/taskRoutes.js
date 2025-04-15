@@ -13,7 +13,7 @@ import {
   updateTask,
   updateTaskStage,
 } from "../controllers/taskController.js";
-import { isAdminRoute, protectRoute } from "../middleware/authMiddleware.js";
+import { isAdminRoute, protectRoute } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
