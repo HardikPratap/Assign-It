@@ -21,6 +21,7 @@ router.post("/logout", logoutUser);
 
 router.get("/get-team", protectRoute, isAdminRoute, getTeamList);
 router.get("/notifications", protectRoute, getNotificationsList);
+router.get("/get-status", protectRoute, isAdminRoute, getUserTaskStatus);
 
 router.put("/profile", protectRoute, updateUserProfile);
 router.put("/read-noti", protectRoute, markNotificationRead);
