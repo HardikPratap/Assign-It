@@ -1,14 +1,13 @@
-import { Dialog } from "@headlessui/react";
+import { DialogTitle } from "@headlessui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-
+import { useCreateSubTaskMutation } from "../../redux/slices/api/taskApiSlice";
 import Button from "../Button";
+import Loading from "../Loading";
 import ModalWrapper from "../ModalWrapper";
 import Textbox from "../TextBox";
-import { useCreateSubTaskMutation } from "../../redux/slices/api/taskApiSlice";
-import Loading from "../Loading";
 
 
 const AddSubTask = ({ open, setOpen, id }) => {
@@ -39,12 +38,12 @@ const AddSubTask = ({ open, setOpen, id }) => {
     <>
       <ModalWrapper open={open} setOpen={setOpen}>
         <form onSubmit={handleSubmit(handleOnSubmit)} className=''>
-          <Dialog.Title
+          <DialogTitle
             as='h2'
             className='text-base font-bold leading-6 text-gray-900 mb-4'
           >
             ADD SUB-TASK
-          </Dialog.Title>
+          </DialogTitle>
           <div className='mt-2 flex flex-col gap-6'>
             <Textbox
               placeholder='Sub-Task title'

@@ -3,9 +3,10 @@ import { MdOutlineSearch } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 // import UserAvatar from "./UserAvatar";
 // import NotificationPanel from "./NotificationPanel";
-import { setOpenSidebar } from "../redux/slices/authSplice";
+
 import UserAvatar from "./UserAvatar";
 import NotificationPanel from "./NotificationPanel";
+import { setOpenSidebar } from "../redux/slices/authSlice";
 
 const Navbar = memo(() => {
   const { user,isSidebarOpen } = useSelector((state) => state.auth);

@@ -1,5 +1,5 @@
 import { USERS_URL } from "../../../utils/contants";
-import apiSlice from "../apiSlice";
+import { apiSlice } from "../apiSlice";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -14,7 +14,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
     getTeamLists: builder.query({
       query: ({ search }) => ({
-        url: `${USERS_URL}/get-team?search=${search}`,
+        url: `${USERS_URL}/get-team?search=${search || ""}`,
         method: "GET",
         credentials: "include",
       }),

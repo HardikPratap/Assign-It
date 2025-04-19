@@ -7,10 +7,11 @@ import  Button  from '../components/Button';
 import  {GlobeDemo}  from '../components/ui/GlobeDemo';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useLoginMutation } from '../redux/slices/api/authApiSlice.js';
+
 import { toast } from 'sonner';
-import { setCredentials } from '../redux/slices/authSplice.js';
-import Loader from '../components/Loading.jsx';
+import Loading from '../components/Loading.jsx';
+import { setCredentials } from '../redux/slices/authSlice.js';
+import { useLoginMutation } from '../redux/slices/api/authApiSlice.js';
 
 
 function Login() {
@@ -84,7 +85,7 @@ function Login() {
                         </div>
 
                     
-                    {isLoading ? (<Loader />) : (<Button type='submit' 
+                    {isLoading ? (<Loading />) : (<Button type='submit' 
                         className='mt-10  h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200 bg-gradient-to-tl from-gray-500 to-white text-white'
                         label="Login"
                     />)}

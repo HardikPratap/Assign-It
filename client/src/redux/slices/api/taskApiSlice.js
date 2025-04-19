@@ -1,5 +1,5 @@
 import { TASKS_URL } from "../../../utils/contants";
-import apiSlice from "../apiSlice";
+import { apiSlice } from "../apiSlice";
 
 export const postApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

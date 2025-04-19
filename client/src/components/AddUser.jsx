@@ -10,8 +10,8 @@ import { Loader } from "@react-three/drei";
 import Textbox from "./TextBox";
 import { toast } from "sonner";
 import { useRegisterMutation } from "../redux/slices/api/authApiSlice";
-import { useGetTeamListQuery, useUpdateUserMutation } from "../redux/slices/api/userApiSlice";
-import { setCredentials } from "../redux/slices/authSplice";
+import { useGetTeamListsQuery, useUpdateUserMutation } from "../redux/slices/api/userApiSlice";
+import { setCredentials } from "../redux/slices/authSlice";
 
 const AddUser = ({ open, setOpen, userData }) => {
   let defaultValues = userData ?? {};
@@ -27,7 +27,7 @@ const AddUser = ({ open, setOpen, userData }) => {
 
   const [ addNewUser,{isLoading}]= useRegisterMutation()
   const [ updateUser,{isLoading: isUpdating}]= useUpdateUserMutation()
-  const {refetch} = useGetTeamListQuery()
+  const {refetch} = useGetTeamListsQuery()
 
   const handleOnSubmit = async(data) => {
     try{

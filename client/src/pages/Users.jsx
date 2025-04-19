@@ -8,7 +8,7 @@ import { summary } from "../assets/data";
 import Button from "../components/Button";
 import AddUser from "../components/AddUser";
 import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
-import { useDeleteUserMutation, useGetTeamListQuery, useUpdateUserMutation, useUserActionMutation } from "../redux/slices/api/userApiSlice";
+import { useDeleteUserMutation, useGetTeamListsQuery, useUpdateUserMutation, useUserActionMutation } from "../redux/slices/api/userApiSlice";
 import { toast } from "sonner";
 import { isAction } from "@reduxjs/toolkit";
 
@@ -19,7 +19,7 @@ const Users = () => {
   const [openAction, setOpenAction] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  const{data , isLoading , refetch}= useGetTeamListQuery()
+  const{data , isLoading , refetch}= useGetTeamListsQuery({search: ""})
   const[deleteUser]= useDeleteUserMutation()
   const[userAction]= useUserActionMutation()
 
