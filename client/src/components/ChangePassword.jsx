@@ -1,12 +1,12 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useChangePasswordMutation } from '../redux/splice/api/userApiSlice'
+import { useChangePasswordMutation } from '../redux/slices/api/userApiSlice'
 import { changeUserPassword } from '../../../server/controllers/UserControllers'
 import { toast } from 'sonner'
 import ModalWrapper from './ModalWrapper'
 import { DialogTitle } from '@headlessui/react'
 import Textbox from './TextBox'
-import Loader from './Loader'
+import Loader from './Loading'
 import Button from './Button'
 
 function ChangePassword({open,setOpen} ){

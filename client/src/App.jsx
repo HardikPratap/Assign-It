@@ -16,7 +16,7 @@ import { IoClose } from 'react-icons/io5';
 import clsx from 'clsx';
 import { Transition } from '@headlessui/react';
 import { Fragment, useRef } from 'react';
-import { setOpenSidebar } from './redux/splice/authSplice';
+import { setOpenSidebar } from './redux/slices/authSplice';
 
 
 function Layout(){

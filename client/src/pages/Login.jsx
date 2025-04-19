@@ -7,10 +7,10 @@ import  Button  from '../components/Button';
 import  {GlobeDemo}  from '../components/ui/GlobeDemo';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useLoginMutation } from '../redux/splice/api/authApiSlice.js';
+import { useLoginMutation } from '../redux/slices/api/authApiSlice.js';
 import { toast } from 'sonner';
-import { setCredentials } from '../redux/splice/authSplice';
-import Loader from '../components/Loader.jsx';
+import { setCredentials } from '../redux/slices/authSplice.js';
+import Loader from '../components/Loading.jsx';
 
 
 function Login() {

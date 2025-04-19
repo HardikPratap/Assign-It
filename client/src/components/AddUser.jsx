@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import ModalWrapper from "./ModalWrapper";
 import { Dialog, DialogTitle } from "@headlessui/react";
 
-import Loading from "./Loader";
+import Loading from "./Loading";
 import Button from "./Button";
 import { Loader } from "@react-three/drei";
 import Textbox from "./TextBox";
 import { toast } from "sonner";
-import { useRegisterMutation } from "../redux/splice/api/authApiSlice";
-import { useGetTeamListQuery, useUpdateUserMutation } from "../redux/splice/api/userApiSlice";
-import { setCredentials } from "../redux/splice/authSplice";
+import { useRegisterMutation } from "../redux/slices/api/authApiSlice";
+import { useGetTeamListQuery, useUpdateUserMutation } from "../redux/slices/api/userApiSlice";
+import { setCredentials } from "../redux/slices/authSplice";
 
 const AddUser = ({ open, setOpen, userData }) => {
   let defaultValues = userData ?? {};

@@ -8,7 +8,7 @@ import { summary } from "../assets/data";
 import Button from "../components/Button";
 import AddUser from "../components/AddUser";
 import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
-import { useDeleteUserMutation, useGetTeamListQuery, useUpdateUserMutation, useUserActionMutation } from "../redux/splice/api/userApiSlice";
+import { useDeleteUserMutation, useGetTeamListQuery, useUpdateUserMutation, useUserActionMutation } from "../redux/slices/api/userApiSlice";
 import { toast } from "sonner";
 import { isAction } from "@reduxjs/toolkit";
 

@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getInitials } from '../utils';
 import { toast } from 'sonner';
-import { useLogoutMutation } from '../redux/splice/api/authApiSlice';
-import { logout } from '../redux/splice/authSplice';
+import { useLogoutMutation } from '../redux/slices/api/authApiSlice';
+import { logout } from '../redux/slices/authSplice';
 import AddUser from './AddUser';
 // import ChangePassword from './ChangePassword';
 

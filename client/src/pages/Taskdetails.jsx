@@ -18,7 +18,7 @@ import { tasks } from "../assets/data";
 import Tabs from "../components/Tabs";
 import { getInitials, PRIOTITYSTYELS, TASK_TYPE } from "../utils";
 import Button from "../components/Button";
-import Loader from "../components/Loader";
+import Loader from "../components/Loading";
 
 
 const assets = [
