@@ -19,7 +19,7 @@ import AddSubTask from "./AddSubTask";
 import AddTask from "./AddTask";
 import TaskColor from "./TaskColor";
 import { useSelector } from "react-redux";
-import ConfirmatioDialog from "../Dialogs";
+import ConfirmatioDialog from "../ConfirmationDialog";
 
 const CustomTransition = ({ children }) => (
   <Transition

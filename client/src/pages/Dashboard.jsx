@@ -3,7 +3,7 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { FaNewspaper } from "react-icons/fa";
 import { FaArrowsToDot } from "react-icons/fa6";
-import { LuClipboardEdit } from "react-icons/lu";
+import { LuClipboard } from "react-icons/lu";
 import {
   MdAdminPanelSettings,
   MdKeyboardArrowDown,
@@ -71,7 +71,7 @@ const Dashboard = () => {
       _id: "3",
       label: "TASK IN PROGRESS ",
       total: totals["in progress"] || 0,
-      icon: <LuClipboardEdit />,
+      icon: <LuClipboard />,
       bg: "bg-[#f59e0b]",
     },
     {
