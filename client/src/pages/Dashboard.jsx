@@ -14,7 +14,7 @@ import clsx from 'clsx';
 import Charts from '../components/Charts';
 import { BGS, getInitials, PRIOTITYSTYELS, TASK_TYPE } from '../utils';
 import UserInfo from '../components/UserInfo';
-import TaskTable from '../components/Task/TaskTable';
+import TaskTable from '../components/tasks/TaskTable';
 
 
 function UserTable({users}){

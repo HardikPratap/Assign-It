@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import TaskDialog from './Task/TaskDialog';
+import TaskDialog from './tasks/TaskDialog';
 import { MdAttachFile, MdKeyboardArrowDown, MdKeyboardArrowUp, MdKeyboardDoubleArrowUp } from 'react-icons/md';
 import clsx from 'clsx';
 import { BGS, formatDate, PRIOTITYSTYELS, TASK_TYPE } from '../utils';
@@ -9,7 +9,7 @@ import { FaList } from 'react-icons/fa';
 import UserInfo from './UserInfo';
 import { tasks } from '../assets/data';
 import { IoMdAdd } from 'react-icons/io';
-import AddSubTask from './Task/AddSubTask';
+import AddSubTask from './tasks/AddSubTask';
 
 const ICONS = {
     high: <MdKeyboardDoubleArrowUp />,

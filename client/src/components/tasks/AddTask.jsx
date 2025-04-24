@@ -15,16 +15,14 @@ import {
   useUpdateTaskMutation,
 } from "../../redux/slices/api/taskApiSlice";
 import { dateFormatter } from "../../utils";
-
+import { app } from "../../utils/firebase";
 import Button from "../Button";
 import Loading from "../Loading";
 import ModalWrapper from "../ModalWrapper";
 import SelectList from "../SelectList";
 
-
-import Textbox from "../TextBox";
 import UserList from "./UsersSelect";
-import { app } from "../../utils/firebase";
+import Textbox from "../TextBox";
 
 const LISTS = ["TODO", "IN PROGRESS", "COMPLETED"];
 const PRIORIRY = ["HIGH", "MEDIUM", "NORMAL", "LOW"];
