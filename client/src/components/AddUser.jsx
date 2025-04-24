@@ -1,17 +1,16 @@
+import { Dialog } from "@headlessui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import ModalWrapper from "./ModalWrapper";
-import { Dialog, DialogTitle } from "@headlessui/react";
-
-import Loading from "./Loading";
-import Button from "./Button";
-import { Loader } from "@react-three/drei";
-import Textbox from "./TextBox";
 import { toast } from "sonner";
 import { useRegisterMutation } from "../redux/slices/api/authApiSlice";
-import { useGetTeamListsQuery, useUpdateUserMutation } from "../redux/slices/api/userApiSlice";
+import { useUpdateUserMutation } from "../redux/slices/api/userApiSlice";
 import { setCredentials } from "../redux/slices/authSlice";
+import Button from "./Button";
+import Loading from "./Loading";
+import ModalWrapper from "./ModalWrapper";
+import Textbox from "./TextBox";
+
 
 const AddUser = ({ open, setOpen, userData }) => {
   let defaultValues = userData ?? {};
@@ -23,50 +22,46 @@ const AddUser = ({ open, setOpen, userData }) => {
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [ addNewUser,{isLoading}]= useRegisterMutation()
-  const [ updateUser,{isLoading: isUpdating}]= useUpdateUserMutation()
-  const {refetch} = useGetTeamListsQuery()
+  const [addNewUser, { isLoading }] = useRegisterMutation();
+  const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
-  const handleOnSubmit = async(data) => {
-    try{
-      if(userData){
-        const result = await updateUser(data).unwrap()
-        toast.success(result?.message)
-        if(userData?._id===user._id){
-          dispatch(setCredentials({...result.user}))
+  const handleOnSubmit = async (data) => {
+    try {
+      if (userData) {
+        const res = await updateUser(data).unwrap();
+        toast.success(res?.message);
+        if (userData?._id === user?._id) {
+          dispatch(setCredentials({ ...res?.user }));
         }
-        await refetch()
-      }else{
-        const result= await addNewUser({
+      } else {
+        const res = await addNewUser({
           ...data,
-          password:data.email,
+          password: data?.email,
         }).unwrap();
-        await refetch()
-        toast.success("New User Added successfully")
+        toast.success("New User added successfully");
       }
 
       setTimeout(() => {
-        setOpen(false)
-      }, 500);
-
-    }catch(error){
-      toast.error("Something went Wrong")
+        setOpen(false);
+      }, 1500);
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.data?.message || err.error);
     }
-
   };
 
   return (
     <>
       <ModalWrapper open={open} setOpen={setOpen}>
         <form onSubmit={handleSubmit(handleOnSubmit)} className=''>
-          <DialogTitle
+          <Dialog.Title
             as='h2'
             className='text-base font-bold leading-6 text-gray-900 mb-4'
           >
             {userData ? "UPDATE PROFILE" : "ADD NEW USER"}
-          </DialogTitle>
+          </Dialog.Title>
           <div className='mt-2 flex flex-col gap-6'>
             <Textbox
               placeholder='Full name'
@@ -117,7 +112,7 @@ const AddUser = ({ open, setOpen, userData }) => {
 
           {isLoading || isUpdating ? (
             <div className='py-5'>
-              <Loader />
+              <Loading />
             </div>
           ) : (
             <div className='py-3 mt-4 sm:flex sm:flex-row-reverse'>

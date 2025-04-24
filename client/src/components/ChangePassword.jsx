@@ -1,100 +1,101 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { useChangePasswordMutation } from '../redux/slices/api/userApiSlice'
-import { changeUserPassword } from '../../../server/controllers/UserControllers'
-import { toast } from 'sonner'
-import ModalWrapper from './ModalWrapper'
-import { DialogTitle } from '@headlessui/react'
-import Textbox from './TextBox'
-import Loader from './Loading'
-import Button from './Button'
+import { Dialog } from "@headlessui/react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import Button from "./Button";
+import Loading from "./Loading";
+import ModalWrapper from "./ModalWrapper";
 
-function ChangePassword({open,setOpen} ){
-    const{
-        register,
-        handleSubmit,
-        formState:{errors},
-    }=useForm()
+import { useChangePasswordMutation } from "../redux/slices/api/userApiSlice";
+import { toast } from "sonner";
+import Textbox from "./TextBox";
 
-    const[changeUserPassword,{isLoading}]=useChangePasswordMutation()
-    
-    const handleOnSubmit=async(data)=>{
-        if(data.password!==data.cpass){
-            toast.warning("Password Doesn't match")
-            return
-        }
+const ChangePassword = ({ open, setOpen }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-        try{
-            const res= await changeUserPassword(data).unwrap()
-            toast.success("New User Added Successfully")
+  const [changeUserPassword, { isLoading }] = useChangePasswordMutation();
 
-            setTimeout(()=>{
-                setOpen(false)
-            },1500)
-        }catch(error){
-            console.log(error)
-            toast.error(error?.data?.message || "Unexpected error occured")
-        }
+  const handleOnSubmit = async (data) => {
+    if (data.password !== data.cpass) {
+      toast.warning("Passwords doesn't match");
+      return;
     }
+    try {
+      const res = await changeUserPassword(data).unwrap();
+      toast.success("New User added successfully");
+
+      setTimeout(() => {
+        setOpen(false);
+      }, 1500);
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
   return (
     <>
-        <ModalWrapper open={open} setOpen={setOpen}>
-        <form onSubmit={handleSubmit(handleOnSubmit)}>
-                <DialogTitle as='h2'
-                    className='text-base font-bold leading-6 text-gray-900 mb-4'
-                >
-                    Change Password
-                </DialogTitle>
+      <ModalWrapper open={open} setOpen={setOpen}>
+        <form onSubmit={handleSubmit(handleOnSubmit)} className=''>
+          <Dialog.Title
+            as='h2'
+            className='text-base font-bold leading-6 text-gray-900 mb-4'
+          >
+            Change Passowrd
+          </Dialog.Title>
+          <div className='mt-2 flex flex-col gap-6'>
+            <Textbox
+              placeholder='New Passowrd'
+              type='password'
+              name='password'
+              label='New Passowrd'
+              className='w-full rounded'
+              register={register("password", {
+                required: "New Passowrd is required!",
+              })}
+              error={errors.password ? errors.password.message : ""}
+            />
+            <Textbox
+              placeholder='Confirm New Passowrd'
+              type='password'
+              name='cpass'
+              label='Confirm New Passowrd'
+              className='w-full rounded'
+              register={register("cpass", {
+                required: "Confirm New Passowrd is required!",
+              })}
+              error={errors.cpass ? errors.cpass.message : ""}
+            />
+          </div>
 
-                <div className='mt-2 flex flex-col gap-6'>
-                    <Textbox
-                        placeholder= 'New Passowrd'
-                        type= 'password'
-                        name= 'password'
-                        label= 'New Passowrd'
-                        className='w-full rounded'
-                        register={register("password", {
-                            required: "New Password is required!",
-                            minLength: {
-                                value: 8,
-                                message: "Password must be at least 8 characters long",
-                            },
-                        })}
-                        error={errors.password? errors.password.message :""}
-                    />
-                    <Textbox
-                        placeholder= 'Confirm New Passowrd'
-                        type= 'password'
-                        name= 'cpass'
-                        label= 'Confirm New Passowrd'
-                        className='w-full rounded'
-                        register={register ("cpass", {
-                        required: "Confirm New Passowrd is required!",
-                        })}
-                        error={errors.cpass? errors.cpass.message :""}
-                    />
+          {isLoading ? (
+            <div className='py-5'>
+              <Loading />
+            </div>
+          ) : (
+            <div className='py-3 mt-4 sm:flex sm:flex-row-reverse'>
+              <Button
+                type='submit'
+                className='bg-blue-600 px-8 text-sm font-semibold text-white hover:bg-blue-700  sm:w-auto'
+                label='Save'
+              />
 
-                </div>
-
-                {isLoading ?(
-                    <div className='py-5'>
-                        <Loader/>
-                    </div>
-                ):(
-                    <div className='py-3 mt-4 sm: flex sm: flex-row-reverse'>
-
-                        <Button
-                        type='submit'
-                        className=' bg-blue-600 px-8 text-sm font-semibold'
-                        label='Save'
-                        />
-                    </div>
-                )
-            }
-            </form>
-        </ModalWrapper>
+              <button
+                type='button'
+                className='bg-white px-5 text-sm font-semibold text-gray-900 sm:w-auto'
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
+        </form>
+      </ModalWrapper>
     </>
-  )
-}
+  );
+};
 
-export default ChangePassword
+export default ChangePassword;

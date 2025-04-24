@@ -11,7 +11,7 @@ import { FaNewspaper, FaUsers } from "react-icons/fa";
 import { FaArrowsToDot } from "react-icons/fa6";
 import moment from "moment";   // whats moment used for?
 import clsx from 'clsx';
-import Charts from '../components/Charts';
+import Charts from '../components/Chart';
 import { BGS, getInitials, PRIOTITYSTYELS, TASK_TYPE } from '../utils';
 import UserInfo from '../components/UserInfo';
 import TaskTable from '../components/tasks/TaskTable';

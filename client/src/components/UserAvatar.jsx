@@ -1,93 +1,103 @@
-import React from 'react'
-import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { FaUser, FaUserLock } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getInitials } from '../utils';
-import { toast } from 'sonner';
-import AddUser from './AddUser';
-import { useLogoutMutation } from '../redux/slices/api/authApiSlice';
-import { logout } from '../redux/slices/authSlice';
-// import ChangePassword from './ChangePassword';
+import { toast } from "sonner";
+import { useLogoutMutation } from "../redux/slices/api/authApiSlice";
+import { logout } from "../redux/slices/authSlice";
+import { getInitials } from "../utils";
+import AddUser from "./AddUser";
+import ChangePassword from "./ChangePassword";
 
+const UserAvatar = () => {
+  const [open, setOpen] = useState(false);
+  const [openPassword, setOpenPassword] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  const [logoutUser] = useLogoutMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-function UserAvatar() {
+  const logoutHandler = async () => {
+    try {
+      await logoutUser().unwrap();
+      dispatch(logout());
 
-    const [open, setOpen] = useState(false);
-    const [openPassword, setOpenPassword] = useState(false);
-    const { user } = useSelector((state) => state.auth);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [logoutUser]= useLogoutMutation()
-
-    async function logoutHandler(){
-      try{
-        await logoutUser().unwrap();
-        dispatch(logout())
-        navigate("/login")
-      }catch(err){
-        toast.err("Something Went Wrong")
-      }
+      navigate("/log-in");
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
     }
+  };
 
-    // console.log(user?.name)
-  
   return (
     <>
-    <div>
-        <Menu as='div'>
-        <div>
-            <MenuButton className='w-10 h-10 2xl:w-12 2xl:h-12 items-center justify-center rounded-full bg-blue-600'>
+      <div className=''>
+        <Menu as='div' className='relative inline-block text-left'>
+          <div>
+            <Menu.Button className='w-10 h-10 2xl:w-12 2xl:h-12 items-center justify-center rounded-full bg-blue-600'>
               <span className='text-white font-semibold'>
                 {getInitials(user?.name)}
               </span>
-            </MenuButton>
-        </div>
+            </Menu.Button>
+          </div>
 
-        <MenuItems
-          transition
-          anchor="bottom end"
-          className="w-52 origin-top-right z-10 rounded-xl border border-white/5 bg-neutral-900 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
-        >
-          <MenuItem>
-            <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
-              <FaUser className="size-4 fill-white/30" />
-              Profile
-              <kbd className="ml-auto hidden font-sans text-xs text-white/50 group-data-[focus]:inline">⌘P</kbd>
-            </button>
-          </MenuItem>
-          <MenuItem>
-            <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10"
-            onClick={()=>{setOpenPassword(true)}}>
-              <FaUserLock className="size-4 fill-white/30" 
-              />
-              Change Password
-              <kbd className="ml-auto hidden font-sans text-xs text-white/50 group-data-[focus]:inline">⌘A</kbd>
-            </button>
-          </MenuItem>
-          <div className="my-1 h-px bg-white/5" />
-          <MenuItem>
-            <button 
-                className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 text-red-800 data-[focus]:bg-white/10"
-                onClick={logoutHandler}>
-                
-              <IoLogOutOutline className="size-4 fill-white/30" />
-              LogOut
-              <kbd className="ml-auto hidden font-sans text-xs text-white/50 group-data-[focus]:inline">⌘L</kbd>
-            </button>
-          </MenuItem>
-         
-        </MenuItems>
+          <Transition
+            as={Fragment}
+            enter='transition ease-out duration-100'
+            enterFrom='transform opacity-0 scale-95'
+            enterTo='transform opacity-100 scale-100'
+            leave='transition ease-in duration-75'
+            leaveFrom='transform opacity-100 scale-100'
+            leaveTo='transform opacity-0 scale-95'
+          >
+            <Menu.Items className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-[#1f1f1f] shadow-2xl ring-1 ring-black/5 focus:outline-none'>
+              <div className='p-4'>
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      onClick={() => setOpen(true)}
+                      className={`text-gray-700 dark:text-gray-300  group flex w-full items-center rounded-md px-2 py-2 text-base`}
+                    >
+                      <FaUser className='mr-2' aria-hidden='true' />
+                      Profile
+                    </button>
+                  )}
+                </Menu.Item>
 
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      onClick={() => setOpenPassword(true)}
+                      className={`text-gray-700 dark:text-gray-300  group flex w-full items-center rounded-md px-2 py-2 text-base`}
+                    >
+                      <FaUserLock className='mr-2' aria-hidden='true' />
+                      Change Password
+                    </button>
+                  )}
+                </Menu.Item>
 
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      onClick={logoutHandler}
+                      className={`text-red-600 group flex w-full items-center rounded-md px-2 py-2 text-base`}
+                    >
+                      <IoLogOutOutline className='mr-2' aria-hidden='true' />
+                      Logout
+                    </button>
+                  )}
+                </Menu.Item>
+              </div>
+            </Menu.Items>
+          </Transition>
         </Menu>
-    </div>
-    <AddUser open={open} setOpen={setOpen} userData={user} />
-    {/* <ChangePassword open={openPassword} setOpen={setOpenPassword} /> */}
-    </>
-   )
-}
+      </div>
 
-export default UserAvatar
+      <AddUser open={open} setOpen={setOpen} userData={user} />
+      <ChangePassword open={openPassword} setOpen={setOpenPassword} />
+    </>
+  );
+};
+
+export default UserAvatar;
