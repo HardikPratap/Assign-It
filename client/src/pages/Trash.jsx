@@ -7,13 +7,21 @@ import {
   MdKeyboardDoubleArrowUp,
   MdOutlineRestore,
 } from "react-icons/md";
-import Button from "../components/Button";
-import { PRIOTITYSTYELS, TASK_TYPE } from "../utils";
-import Title from "../components/Title";
-import { tasks } from "../assets/data";
-import ConfirmatioDialog from "../components/Dialogs";
-import AddUser from "../components/AddUser";
-
+import { toast } from "sonner";
+import {
+  AddUser,
+  Button,
+  ConfirmatioDialog,
+  Loading,
+  Title,
+} from "../components";
+import { TaskColor } from "../components/tasks";
+import {
+  useDeleteRestoreTastMutation,
+  useGetAllTaskQuery,
+} from "../redux/slices/api/taskApiSlice";
+import { PRIOTITYSTYELS, TASK_TYPE } from "../utils/index";
+import { useSearchParams } from "react-router-dom";
 
 const ICONS = {
   high: <MdKeyboardDoubleArrowUp />,
@@ -27,6 +35,15 @@ const Trash = () => {
   const [msg, setMsg] = useState(null);
   const [type, setType] = useState("delete");
   const [selected, setSelected] = useState("");
+  const [searchParams] = useSearchParams();
+  const [searchTerm] = useState(searchParams.get("search") || "");
+
+  const { data, isLoading, refetch } = useGetAllTaskQuery({
+    strQuery: "",
+    isTrashed: "true",
+    search: searchTerm,
+  });
+  const [deleteRestoreTask] = useDeleteRestoreTastMutation();
 
   const deleteAllClick = () => {
     setType("deleteAll");
@@ -52,10 +69,53 @@ const Trash = () => {
     setMsg("Do you want to restore the selected item?");
     setOpenDialog(true);
   };
+  // WE GO HERE ON RESUME
+  const deleteRestoreHandler = async () => {
+    try {
+      let res = null;
+
+      switch (type) {
+        case "delete":
+          res = await deleteRestoreTask({
+            id: selected,
+            actionType: "delete",
+          }).unwrap();
+          break;
+        case "deleteAll":
+          res = await deleteRestoreTask({
+            id: "",
+            actionType: "deleteAll",
+          }).unwrap();
+          break;
+        case "restore":
+          res = await deleteRestoreTask({
+            id: selected,
+            actionType: "restore",
+          }).unwrap();
+          break;
+        case "restoreAll":
+          res = await deleteRestoreTask({
+            id: "",
+            actionType: "restoreAll",
+          }).unwrap();
+          break;
+      }
+
+      toast.success(res?.message);
+
+      setTimeout(() => {
+        setOpenDialog(false);
+        refetch();
+      }, 500);
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
   const TableHeader = () => (
-    <thead className='border-b border-gray-300'>
-      <tr className='light:text-black dark:text-primary text-left'>
+    <thead className='border-b border-gray-300 dark:border-gray-600'>
+      <tr className='text-black dark:text-white  text-left'>
         <th className='py-2'>Task Title</th>
         <th className='py-2'>Priority</th>
         <th className='py-2'>Stage</th>
@@ -65,13 +125,11 @@ const Trash = () => {
   );
 
   const TableRow = ({ item }) => (
-    <tr className='border-b border-gray-200 light:text-gray-600 dark:text-secondary hover:bg-gray-400/10'>
+    <tr className='border-b border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-400/10'>
       <td className='py-2'>
         <div className='flex items-center gap-2'>
-          <div
-            className={clsx("w-4 h-4 rounded-full", TASK_TYPE[item.stage])}
-          />
-          <p className='w-full line-clamp-2 text-base text-primary'>
+          <TaskColor className={TASK_TYPE[item.stage]} />
+          <p className='w-full line-clamp-2 text-base text-black dark:text-gray-400'>
             {item?.title}
           </p>
         </div>
@@ -104,39 +162,51 @@ const Trash = () => {
     </tr>
   );
 
-  return (
+  return isLoading ? (
+    <div className='py-10'>
+      <Loading />
+    </div>
+  ) : (
     <>
       <div className='w-full md:px-1 px-0 mb-6'>
         <div className='flex items-center justify-between mb-8'>
           <Title title='Trashed Tasks' />
 
-          <div className='flex gap-2 md:gap-4 items-center'>
-            <Button
-              label='Restore All'
-              icon={<MdOutlineRestore className='text-lg hidden md:flex' />}
-              className='flex flex-row-reverse gap-1 items-center  text-white text-sm md:text-base rounded-md 2xl:py-2.5'
-              onClick={() => restoreAllClick()}
-            />
-            <Button
-              label='Delete All'
-              icon={<MdDelete className='text-lg hidden md:flex' />}
-              className='flex flex-row-reverse gap-1 items-center  text-red-600 text-sm md:text-base rounded-md 2xl:py-2.5'
-              onClick={() => deleteAllClick()}
-            />
-          </div>
+          {data?.tasks?.length > 0 && (
+            <div className='flex gap-2 md:gap-4 items-center'>
+              <Button
+                label='Restore All'
+                icon={<MdOutlineRestore className='text-lg hidden md:flex' />}
+                className='flex flex-row-reverse gap-1 items-center  text-black text-sm md:text-base rounded-md 2xl:py-2.5'
+                onClick={() => restoreAllClick()}
+              />
+              <Button
+                label='Delete All'
+                icon={<MdDelete className='text-lg hidden md:flex' />}
+                className='flex flex-row-reverse gap-1 items-center  text-red-600 text-sm md:text-base rounded-md 2xl:py-2.5'
+                onClick={() => deleteAllClick()}
+              />
+            </div>
+          )}
         </div>
-        <div className='border border-white/5 bg-neutral-900 px-2 md:px-6 py-4 shadow-md rounded'>
-          <div className='overflow-x-auto'>
-            <table className='w-full mb-5'>
-              <TableHeader />
-              <tbody>
-                {tasks?.map((tk, id) => (
-                  <TableRow key={id} item={tk} />
-                ))}
-              </tbody>
-            </table>
+        {data?.tasks?.length > 0 ? (
+          <div className='bg-white dark:bg-[#1f1f1f] px-2 md:px-6 py-4 shadow-md rounded'>
+            <div className='overflow-x-auto'>
+              <table className='w-full mb-5'>
+                <TableHeader />
+                <tbody>
+                  {data?.tasks?.map((tk, id) => (
+                    <TableRow key={id} item={tk} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className='w-full flex justify-center py-10'>
+            <p className='text-lg text-gray-500'>No Trashed Task</p>
+          </div>
+        )}
       </div>
 
       <AddUser open={open} setOpen={setOpen} />

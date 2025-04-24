@@ -7,7 +7,7 @@ import Dashboard from './pages/Dashboard'
 import Tasks from './pages/Tasks'
 import Users from './pages/Users'
 import Trash from './pages/Trash'
-import Taskdetails from './pages/Taskdetails'
+import Taskdetails from './pages/TaskDetail'
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import Sidebar from './components/Sidebar';
