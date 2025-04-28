@@ -1,4 +1,4 @@
-import { Popover, Transition } from "@headlessui/react";
+import { PopoverButton,Popover, Transition } from "@headlessui/react";
 import moment from "moment";
 import { Fragment, useState } from "react";
 import { BiSolidMessageRounded } from "react-icons/bi";
@@ -52,7 +52,7 @@ export default function NotificationPanel() {
   return (
     <>
       <Popover className='relative'>
-        <Popover.Button className='inline-flex items-center outline-none'>
+        <PopoverButton className='inline-flex items-center outline-none'>
           <div className='w-8 h-8 flex items-center justify-center text-gray-800 dark:text-white  relative'>
             <IoIosNotificationsOutline className='text-2xl' />
             {data?.length > 0 && (
@@ -61,7 +61,7 @@ export default function NotificationPanel() {
               </span>
             )}
           </div>
-        </Popover.Button>
+        </PopoverButton>
 
         <Transition
           as={Fragment}
