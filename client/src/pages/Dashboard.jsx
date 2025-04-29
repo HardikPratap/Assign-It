@@ -12,16 +12,16 @@ import {
 } from "react-icons/md";
 import { Chart, Loading, UserInfo } from "../components";
 import { useGetDasboardStatsQuery } from "../redux/slices/api/taskApiSlice";
-import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
+import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate, getInitials } from "../utils";
 import { useSelector } from "react-redux";
 
 const Card = ({ label, count, bg, icon }) => {
   return (
-    <div className='w-full h-32 bg-white p-5 shadow-md rounded-md flex items-center justify-between'>
+    <div className='w-full h-32 bg-white dark:bg-[#1f1f1f] p-5 shadow-md rounded-md flex items-center justify-between'>
       <div className='h-full flex flex-1 flex-col justify-between'>
-        <p className='text-base text-gray-600'>{label}</p>
-        <span className='text-2xl font-semibold'>{count}</span>
-        <span className='text-sm text-gray-400'>{"111 last month"}</span>
+        <p className='text-base text-gray-400'>{label}</p>
+        <span className='text-2xl text-white font-semibold'>{count}</span>
+        <span className='text-sm text-gray-400'>{"10 Days Ago"}</span>
       </div>
       <div
         className={clsx(
@@ -92,8 +92,8 @@ const Dashboard = () => {
           ))}
         </div>
 
-        <div className='w-full bg-white my-16 p-4 rounded shadow-sm'>
-          <h4 className='text-xl text-gray-500 font-bold mb-2'>
+        <div className='w-full bg-white dark:bg-[#1f1f1f] my-16 p-4 rounded shadow-sm'>
+          <h4 className='text-xl text-gray-400 font-bold mb-2'>
             Chart by Priority
           </h4>
           <Chart data={data?.graphData} />
@@ -121,15 +121,15 @@ const UserTable = ({ users }) => {
   );
 
   const TableRow = ({ user }) => (
-    <tr className='border-b border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-400/10'>
+    <tr className='border-b border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-400 hover:bg-gray-400/10'>
       <td className='py-2'>
         <div className='flex items-center gap-3'>
           <div className='w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-violet-700'>
             <span className='text-center'>{getInitials(user?.name)}</span>
           </div>
           <div>
-            <p> {user.name}</p>
-            <span className='text-xs text-black'>{user?.role}</span>
+            <p className="dark:text-gray-400"> {user.name}</p>
+            <span className='text-xs text-black dark:text-gray-500'>{user?.role}</span>
           </div>
         </div>
       </td>
@@ -137,7 +137,7 @@ const UserTable = ({ users }) => {
       <td>
         <p
           className={clsx(
-            "w-fit px-3 py-1 rounded-full text-sm",
+            "w-fit px-3 py-1 rounded-full text-sm dark:text-gray-800",
             user?.isActive ? "bg-blue-200" : "bg-yellow-100"
           )}
         >
@@ -149,7 +149,7 @@ const UserTable = ({ users }) => {
   );
 
   return (
-    <div className='w-full md:w-1/3 bg-white h-fit px-2 md:px-6 py-4 shadow-md rounded'>
+    <div className='w-full md:w-1/3 bg-white dark:bg-[#1f1f1f] h-fit px-2 md:px-6 py-4 shadow-md rounded'>
       <table className='w-full mb-5'>
         <TableHeader />
         <tbody>
@@ -172,7 +172,7 @@ const TaskTable = ({ tasks }) => {
   };
 
   const TableHeader = () => (
-    <thead className='border-b border-gray-300 dark:border-gray-600'>
+    <thead className='border-b border-gray-300 dark:border-gray-600 '>
       <tr className='text-black dark:text-white  text-left'>
         <th className='py-2'>Task Title</th>
         <th className='py-2'>Priority</th>
@@ -189,7 +189,7 @@ const TaskTable = ({ tasks }) => {
           <div
             className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
           />
-          <p className='text-base text-black dark:text-gray-400'>
+          <p className='text-base text-gray-400 dark:text-gray-400'>
             {task?.title}
           </p>
         </div>
@@ -199,7 +199,7 @@ const TaskTable = ({ tasks }) => {
           <span className={clsx("text-lg", PRIOTITYSTYELS[task?.priority])}>
             {ICONS[task?.priority]}
           </span>
-          <span className='capitalize'>{task?.priority}</span>
+          <span className='capitalize text-gray-400'>{task?.priority}</span>
         </div>
       </td>
 
@@ -220,7 +220,7 @@ const TaskTable = ({ tasks }) => {
       </td>
 
       <td className='py-2 hidden md:block'>
-        <span className='text-base text-gray-600'>
+        <span className='text-base text-gray-500'>
           {moment(task?.date).fromNow()}
         </span>
       </td>
