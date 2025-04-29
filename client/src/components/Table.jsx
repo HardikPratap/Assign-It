@@ -68,12 +68,12 @@ const Table = ({ tasks }) => {
   );
 
   const TableRow = ({ task }) => (
-    <tr className='border-b border-gray-200 text-gray-600 hover:bg-gray-300/10'>
+    <tr className='border-b border-gray-200  hover:bg-gray-300/10'>
       <td className='py-2'>
         <Link to={`/task/${task._id}`}>
           <div className='flex items-center gap-2'>
             <TaskColor className={TASK_TYPE[task.stage]} />
-            <p className='w-full line-clamp-2 text-base text-black'>
+            <p className='w-full line-clamp-2 text-base text-white'>
               {task?.title}
             </p>
           </div>
@@ -85,14 +85,14 @@ const Table = ({ tasks }) => {
           <span className={clsx("text-lg", PRIOTITYSTYELS[task?.priority])}>
             {ICONS[task?.priority]}
           </span>
-          <span className='capitalize line-clamp-1'>
+          <span className='capitalize line-clamp-1 text-gray-400'>
             {task?.priority} Priority
           </span>
         </div>
       </td>
 
       <td className='py-2'>
-        <span className='text-sm text-gray-600'>
+        <span className='text-sm text-gray-400'>
           {formatDate(new Date(task?.date))}
         </span>
       </td>
@@ -141,7 +141,7 @@ const Table = ({ tasks }) => {
 
   return (
     <>
-      <div className='bg-white  px-2 md:px-4 pt-4 pb-9 shadow-md rounded'>
+      <div className='dark:bg-[#1f1f1f]  px-2 md:px-4 pt-4 pb-9 shadow-md rounded'>
         <div className='overflow-x-auto'>
           <table className='w-full '>
             <TableHeader />
