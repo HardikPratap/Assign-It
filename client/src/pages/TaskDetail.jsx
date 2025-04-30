@@ -132,21 +132,21 @@ const Activities = ({ activity, id, refetch }) => {
         </div>
 
         <div className='flex flex-col gap-y-1 mb-8'>
-          <p className='font-semibold'>{item?.by?.name}</p>
-          <div className='text-gray-500 space-x-2'>
+          <p className='font-semibold dark:text-white'>{item?.by?.name}</p>
+          <div className='text-gray-400 space-x-2'>
             <span className='capitalize'>{item?.type}</span>
             <span className='text-sm'>{moment(item?.date).fromNow()}</span>
           </div>
-          <div className='text-gray-700'>{item?.activity}</div>
+          <div className='text-gray-600'>{item?.activity}</div>
         </div>
       </div>
     );
   };
 
   return (
-    <div className='w-full flex gap-10 2xl:gap-20 min-h-screen px-10 py-8 bg-white shadow rounded-md justify-between overflow-y-auto'>
+    <div className='w-full flex gap-10 2xl:gap-20 min-h-screen px-10 py-8 bg-white dark:bg-[#1f1f1f] shadow rounded-md justify-between overflow-y-auto'>
       <div className='w-full md:w-1/2'>
-        <h4 className='text-gray-600 font-semibold text-lg mb-5'>Activities</h4>
+        <h4 className='text-gray-600 font-semibold text-lg mb-5 dark:text-gray-400'>Activities</h4>
         <div className='w-full space-y-0'>
           {activity?.map((item, index) => (
             <Card
@@ -162,7 +162,7 @@ const Activities = ({ activity, id, refetch }) => {
         <h4 className='text-gray-600 font-semibold text-lg mb-5'>
           Add Activity
         </h4>
-        <div className='w-full flex flex-wrap gap-5'>
+        <div className='w-full flex flex-wrap gap-5 text-gray-400'>
           {act_types.map((item, index) => (
             <div key={item} className='flex gap-2 items-center'>
               <input
@@ -179,7 +179,7 @@ const Activities = ({ activity, id, refetch }) => {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder='Type ......'
-            className='bg-white w-full mt-10 border border-gray-300 outline-none p-4 rounded-md focus:ring-2 ring-blue-500'
+            className='bg-white w-full mt-10 border border-gray-300 dark:bg-slate-700 outline-none p-4 rounded-md focus:ring-2 ring-blue-500'
           ></textarea>
           {isLoading ? (
             <Loading />
@@ -242,7 +242,7 @@ const TaskDetail = () => {
       <Tabs tabs={TABS} setSelected={setSelected}>
         {selected === 0 ? (
           <>
-            <div className='w-full flex flex-col md:flex-row gap-5 2xl:gap-8 bg-white shadow rounded-md px-8 py-8 overflow-y-auto'>
+            <div className='w-full flex flex-col md:flex-row gap-5 2xl:gap-8 bg-white dark:bg-[#1f1f1f] shadow rounded-md px-8 py-8 overflow-y-auto'>
               <div className='w-full md:w-1/2 space-y-8'>
                 <div className='flex items-center gap-5'>
                   <div
@@ -258,27 +258,27 @@ const TaskDetail = () => {
 
                   <div className={clsx("flex items-center gap-2")}>
                     <TaskColor className={TASK_TYPE[task?.stage]} />
-                    <span className='text-black uppercase'>{task?.stage}</span>
+                    <span className='text-black dark:text-white uppercase'>{task?.stage}</span>
                   </div>
                 </div>
 
-                <p className='text-gray-500'>
+                <p className='text-gray-400'>
                   Created At: {new Date(task?.date).toDateString()}
                 </p>
 
-                <div className='flex items-center gap-8 p-4 border-y border-gray-200'>
+                <div className='flex items-center gap-8 p-4 border-y border-gray-200 dark:text-gray-200'>
                   <div className='space-x-2'>
                     <span className='font-semibold'>Assets :</span>
                     <span>{task?.assets?.length}</span>
                   </div>
-                  <span className='text-gray-400'>|</span>
+                  <span className='text-gray-200'>|</span>
                   <div className='space-x-2'>
                     <span className='font-semibold'>Sub-Task :</span>
                     <span>{task?.subTasks?.length}</span>
                   </div>
                 </div>
 
-                <div className='space-y-4 py-6'>
+                <div className='space-y-4 py-6 dark:text-gray-200'>
                   <p className='text-gray-500 font-semibold text-sm'>
                     TASK TEAM
                   </p>

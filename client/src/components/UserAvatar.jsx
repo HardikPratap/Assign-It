@@ -1,4 +1,4 @@
-import { Menu, Transition } from "@headlessui/react";
+import { Menu,MenuItem, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { FaUser, FaUserLock } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -53,7 +53,7 @@ const UserAvatar = () => {
           >
             <Menu.Items className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-[#1f1f1f] shadow-2xl ring-1 ring-black/5 focus:outline-none'>
               <div className='p-4'>
-                <Menu.Item>
+                <MenuItem>
                   {({ active }) => (
                     <button
                       onClick={() => setOpen(true)}
@@ -63,7 +63,7 @@ const UserAvatar = () => {
                       Profile
                     </button>
                   )}
-                </Menu.Item>
+                </MenuItem>
 
                 <Menu.Item>
                   {({ active }) => (
