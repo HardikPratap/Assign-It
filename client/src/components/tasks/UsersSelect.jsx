@@ -24,14 +24,14 @@ export default function UserList({ team, setTeam }) {
 
   return (
     <div className=''>
-      <p className='text-slate-900 dark:text-gray-500'>Assign Task To:</p>
+      <p className='text-slate-900 dark:text-gray-400'>Assign Task To:</p>
       <Listbox
         value={selectedUsers}
         onChange={(el) => handleChange(el)}
         multiple
       >
         <div className='relative mt-1'>
-          <Listbox.Button className='relative w-full cursor-default rounded bg-white pl-3 pr-10 text-left px-3 py-2.5 2xl:py-3 border border-gray-300 dark:border-gray-600 sm:text-sm'>
+          <Listbox.Button className='relative w-full cursor-default rounded bg-white pl-3 pr-10 text-left px-3 py-2.5 2xl:py-3 border border-gray-300 dark:border-gray-600 dark:bg-transparent dark:text-white sm:text-sm'>
             <span className='block truncate'>
               {selectedUsers?.map((user) => user.name).join(", ")}
             </span>

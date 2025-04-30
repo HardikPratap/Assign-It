@@ -9,7 +9,7 @@ const SelectList = ({ lists, selected, setSelected, label }) => {
       {label && <p className='text-slate-900 dark:text-gray-500'>{label}</p>}
       <Listbox value={selected} onChange={setSelected}>
         <div className='relative mt-1'>
-          <Listbox.Button className='relative w-full cursor-default rounded bg-white pl-3 pr-10 text-left px-3 py-2.5 2xl:py-3 border border-gray-300 dark:border-gray-600 sm:text-sm'>
+          <Listbox.Button className='relative w-full cursor-default rounded bg-white pl-3 pr-10 text-left px-3 py-2.5 2xl:py-3 border border-gray-300 dark:border-gray-600 dark:bg-transparent dark:text-white sm:text-sm'>
             <span className='block truncate'>{selected}</span>
             <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
               <BsChevronExpand

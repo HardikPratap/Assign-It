@@ -136,7 +136,7 @@ const AddTask = ({ open, setOpen, task }) => {
         <form onSubmit={handleSubmit(handleOnSubmit)}>
           <Dialog.Title
             as='h2'
-            className='text-base font-bold leading-6 text-gray-900 mb-4'
+            className='text-base font-bold leading-6 text-gray-900 dark:text-gray-400 mb-4'
           >
             {task ? "UPDATE TASK" : "ADD TASK"}
           </Dialog.Title>
@@ -195,14 +195,14 @@ const AddTask = ({ open, setOpen, task }) => {
                     accept='.jpg, .png, .jpeg'
                     multiple={true}
                   />
-                  <BiImages />
-                  <span>Add Assets</span>
+                  <BiImages className="dark:bg-transparent dark:text-white" />
+                  <span className="dark:bg-transparent dark:text-white">Add Assets</span>
                 </label>
               </div>
             </div>
 
             <div className='w-full'>
-              <p>Task Description</p>
+              <p className="dark:bg-transparent dark:text-white">Task Description</p>
               <textarea
                 name='description'
                 {...register("description")}
@@ -213,7 +213,7 @@ const AddTask = ({ open, setOpen, task }) => {
               ></textarea>
             </div>
 
-            <div className='w-full'>
+            <div className='w-full dark:bg-transparent dark:text-white'>
               <p>
                 Add Links{" "}
                 <span className='text- text-gray-600'>
@@ -236,7 +236,7 @@ const AddTask = ({ open, setOpen, task }) => {
               <Loading />
             </div>
           ) : (
-            <div className='bg-gray-50 mt-6 mb-4 sm:flex sm:flex-row-reverse gap-4'>
+            <div className='bg-gray-50 mt-6 mb-4 sm:flex sm:flex-row-reverse gap-4 bg-transparent'>
               <Button
                 label='Submit'
                 type='submit'
