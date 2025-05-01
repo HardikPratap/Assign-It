@@ -2,6 +2,7 @@ import clsx from "clsx";
 import React, { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import {
+  MdHomeMini,
   MdKeyboardArrowDown,
   MdKeyboardArrowUp,
   MdKeyboardDoubleArrowUp,
@@ -22,6 +23,7 @@ const ICONS = {
   high: <MdKeyboardDoubleArrowUp />,
   medium: <MdKeyboardArrowUp />,
   low: <MdKeyboardArrowDown />,
+  normal: <MdHomeMini />
 };
 
 const TaskCard = ({ task }) => {

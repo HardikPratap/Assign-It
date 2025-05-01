@@ -52,6 +52,7 @@ export const PRIOTITYSTYELS = {
   high: "text-red-600",
   medium: "text-yellow-600",
   low: "text-blue-600",
+  normal: "text-gray-400",
 };
 
 export const TASK_TYPE = {
