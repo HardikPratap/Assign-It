@@ -9,9 +9,7 @@ import { dbConnection } from "./utils/index.js";
 
 dotenv.config();
 
-dbConnection();
-
-const PORT = process.env.PORT || 8801;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -46,4 +44,16 @@ app.use("/api", routes);
 app.use(routeNotFound);
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
+const StartServer = async () => {
+  try {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server listening on ${PORT}`);
+    });
+
+    dbConnection();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+StartServer();
