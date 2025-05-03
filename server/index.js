@@ -15,6 +15,18 @@ const PORT = process.env.PORT || 8801;
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.json({
+    project: "Assign-It API",
+    description:
+      "This is an API for an Task Management application. It provides endpoints for managing taks, assigning, and users.",
+    author: {
+      name: "Hardik",
+    },
+    version: "1.0.0",
+  });
+});
+
 app.use(
   cors({
     origin: [process.env.FRONTEND_URL],
