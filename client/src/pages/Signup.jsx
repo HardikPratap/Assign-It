@@ -19,12 +19,12 @@ function Signup() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
-    const [login, {isLoading}]= useRegisterMutation()
+    const [signup, {isLoading}]= useRegisterMutation()
 
     const submitHandler = async (data) => {
         console.log(data)
         try{
-            const result= await register(data).unwrap()
+            const result= await signup(data).unwrap()
             dispatch(setCredentials(result))
             console.log("submited data: " + result); 
             navigate("/")
@@ -56,7 +56,7 @@ function Signup() {
             >
                 <div className='flex-col items-center justify-center'>
 
-                    <div className='items-center justify-center w-full font-sans font-bold text-5xl'>Login</div>
+                    <div className='items-center justify-center w-full font-sans font-bold text-5xl'>Sign Up</div>
                     <div className='text-sm font-normal mt-4 text-gray-400'>How to i get started lorem ipsum dolor at?</div>
                     
                     {/* Name */}
