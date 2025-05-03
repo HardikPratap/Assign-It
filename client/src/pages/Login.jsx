@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import "../App.css"
 import { useForm } from "react-hook-form";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Textbox from '../components/TextBox';
 import  Button  from '../components/Button';
 import  {GlobeDemo}  from '../components/ui/GlobeDemo';
@@ -49,7 +49,7 @@ function Login() {
         <div className='text-white justify-items-center pt-36  md:w-3/5 bg-black min-h-screen '>
             <form
                 onSubmit={handleSubmit(submitHandler)}
-                className='form-container w-full md:w-[400px] content-center text-center'
+                className='form-container w-full content-center text-center'
             >
                 <div className='flex-col items-center justify-center'>
 
@@ -80,7 +80,7 @@ function Login() {
                             })}
                             error={errors.password ? errors.password.message : ""}
                         />
-                        <div className='text-right mr-10 text-xs mt-2 text-gray-400 hover:cursor-pointer hover:text-blue-600 transition-colors  duration-200'>
+                        <div className='items-center text-xs mt-4 text-gray-400 hover:cursor-pointer hover:text-blue-600 transition-colors  duration-200'>
                             Forgot Password?
                         </div>
 
@@ -89,13 +89,23 @@ function Login() {
                         className='mt-10  h-10 w-32 rounded-md font-semibold decoration-1 hover:border-2 border-blue-600 transition-all duration-200 bg-gradient-to-tl from-gray-500 to-white text-white'
                         label="Login"
                     />)}
-                </div>
 
+                </div>
             </form>
 
                 <div className="inline-flex items-center justify-center w-full">
                     <hr className="w-1/2 h-1 my-8 dark:bg-gray-200 border-2 bg-gray-700"/>
                     <span className="absolute px-3 font-medium bg-transparent justify-center text-white dark:bg-black">Login <span className='text-xs text-gray-400'>with Others</span></span>
+                </div>
+
+                <div className="flex items-center justify-center">
+                    <Link to="/register">
+                        <Button 
+                        className="w-32 max-w-xs h-10 rounded-md font-semibold hover:border-2 border-blue-600 transition-all duration-200 bg-gradient-to-tl from-white to-gray-500 text-white"
+                        label="Sign-Up"
+                        onClick={() => navigate("/register")}
+                        />
+                    </Link>
                 </div>
         </div>
 

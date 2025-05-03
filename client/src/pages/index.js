@@ -5,5 +5,15 @@ import Trash from "./Trash";
 import TaskDetail from "./TaskDetail";
 import Users from "./Users";
 import StatusPage from "./Status";
+import Signup from "./Signup";
 
-export { Dashboard, Login, TaskDetail, Tasks, Trash, Users, StatusPage };
+export {
+  Dashboard,
+  Login,
+  TaskDetail,
+  Tasks,
+  Trash,
+  Users,
+  StatusPage,
+  Signup,
+};
