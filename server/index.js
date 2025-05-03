@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 app.use("/api", routes);
 
 app.use(routeNotFound);
@@ -46,11 +46,10 @@ const PORT = process.env.PORT;
 
 const StartServer = async () => {
   try {
+    await dbConnection();
     app.listen(PORT, "0.0.0.0", () => {
       console.log(`Server listening on ${PORT}`);
     });
-
-    dbConnection();
   } catch (error) {
     console.log(error);
   }
