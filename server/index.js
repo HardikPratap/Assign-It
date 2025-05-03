@@ -48,29 +48,29 @@ app.use("/api", routes);
 app.use(routeNotFound);
 app.use(errorHandler);
 
-// Start server function
-const startServer = async () => {
+const handler = async (req, res) => {
   try {
     await dbConnection();
-    const PORT = process.env.PORT || 8000;
-    app.listen(PORT, () => {
-      console.log(
-        `Server running in ${
-          process.env.NODE_ENV || "development"
-        } mode on port ${PORT}`
-      );
-    });
+    return app(req, res);
   } catch (error) {
-    console.error("Failed to start server:", error);
-    process.exit(1);
+    console.error("Serverless handler error:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-// Determine if running locally or on Vercel
-if (process.env.VERCEL_ENV) {
-  // Export for Vercel serverless
-  module.exports = app;
-} else {
-  // Start normal server for local development
-  startServer();
+// Local development server
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 8000;
+  dbConnection()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error("Database connection failed:", err);
+      process.exit(1);
+    });
 }
+
+export default handler;
