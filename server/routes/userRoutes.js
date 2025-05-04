@@ -11,7 +11,7 @@ import {
   markNotificationRead,
   registerUser,
   updateUserProfile,
-} from "../controllers/UserControllers.js";
+} from "../controllers/userControllers.js";
 import { isAdminRoute, protectRoute } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
