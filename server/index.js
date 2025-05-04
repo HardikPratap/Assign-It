@@ -14,16 +14,9 @@ dotenv.config();
 const app = express();
 
 // Middleware
-// app.use(
-//   cors({
-//     origin: process.env.FRONTEND_URL?.split(",") || "*",
-//     methods: ["GET", "POST", "DELETE", "PUT"],
-//     credentials: true,
-//   })
-// );
-
 app.use(
   cors({
+    origin: process.env.FRONTEND_URL?.split(",") || "*",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })

@@ -26,7 +26,7 @@ function Login() {
     const [login, {isLoading}]= useLoginMutation()
 
     const submitHandler = async (data) => {
-        // console.log(data)
+        console.log(data)
         try{
             const result= await login(data).unwrap()
             dispatch(setCredentials(result))
