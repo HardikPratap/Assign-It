@@ -16,7 +16,7 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL?.split(",") || "*",
+    origin: process.env.FRONTEND_URL || "*",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
@@ -61,7 +61,7 @@ const handler = async (req, res) => {
 // Local development server
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 8000;
-  dbConnection()
+  await dbConnection()
     .then(() => {
       app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
