@@ -7,6 +7,8 @@ import { errorHandler, routeNotFound } from "./middlewares/errorMiddleware.js";
 import routes from "./routes/index.js";
 import { dbConnection } from "./utils/index.js";
 
+const PORT = process.env.PORT || 8800;
+
 // Initialize environment variables
 dotenv.config();
 
@@ -14,13 +16,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "*",
-    methods: ["GET", "POST", "DELETE", "PUT"],
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -38,6 +34,7 @@ app.get("/", (req, res) => {
     author: { name: "Hardik" },
     version: "1.0.0",
     status: "running",
+    port: `console.log("Server running on port" ${PORT})`,
   });
 });
 
@@ -60,7 +57,6 @@ const handler = async (req, res) => {
 
 // Local development server
 if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 8000;
   await dbConnection()
     .then(() => {
       app.listen(PORT, () => {

@@ -5,21 +5,25 @@ import Notice from "../models/Notification.js";
 
 // POST request - login user
 const loginUser = asyncHandler(async (req, res) => {
+  console.log("Login attempt with body:", req.body); // Log incoming data
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    // Basic validation
+    console.log("Email or password missing in request");
+    return res
+      .status(400)
+      .json({ status: false, message: "Email and password are required." });
+  }
+
   const user = await User.findOne({ email });
+  console.log("User found in DB:", user ? user.email : null); // Log if user was found
 
   if (!user) {
+    console.log("User not found for email:", email);
     return res
       .status(401)
       .json({ status: false, message: "Invalid email or password." });
-  }
-
-  if (!user?.isActive) {
-    return res.status(401).json({
-      status: false,
-      message: "User account has been deactivated, contact the administrator",
-    });
   }
 
   const isMatch = await user.matchPassword(password);
