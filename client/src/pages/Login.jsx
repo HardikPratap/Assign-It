@@ -29,6 +29,7 @@ function Login() {
         console.log(data)
         try{
             const result= await login(data).unwrap()
+            console.log("Login success:", result);
             dispatch(setCredentials(result))
             console.log("submited data: " + result); 
             navigate("/")
